@@ -7,11 +7,11 @@
     <version>1.0-SNAPSHOT</version>
 
     <groupId>aiss</groupId>
-    <artifactId>lab5-implementing-restapi</artifactId>
+    <artifactId>AIIS-Integracion</artifactId>
 
     <properties>
         <!-- PUT HERE YOUR projectId FROM GOOGLE CLOUD CONSOLE -->
-        <project.projectId>aiss-lab5</project.projectId>
+        <project.projectId>aiss-libros</project.projectId>
 
         <appengine.version>1.9.80</appengine.version>        <!-- AppEngine version -->
         <gcloud.version>2.1.0</gcloud.version>        <!-- GCloud version -->
