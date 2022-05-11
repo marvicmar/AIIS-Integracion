@@ -64,9 +64,6 @@ public class BookResource {
 					|| book.getTitle().toLowerCase().contains(q.toLowerCase()) 
 					|| book.getAuthor().toLowerCase().contains(q.toLowerCase()) 
 					|| book.getGenre().toLowerCase().contains(q.toLowerCase()) 	
-					|| book.getYear() > 0  
-					|| book.getRate() > 0.
-					|| book.getPagNumber() > 0
 					|| book.getPublisher().toLowerCase().contains(q.toLowerCase())){
 				result.add(book);
 			}
@@ -117,15 +114,15 @@ public class BookResource {
 		if(book.getAuthor() == null || book.getAuthor().isEmpty()) {
 			throw new BadRequestException("Debes pasar un autor");
 		}
-		if(book.getYear() == null || book.getYear() > 0) {
-			throw new BadRequestException("El año debe ser un número positivo");
+		if(book.getYear() == null || book.getYear() < 0) {
+			throw new BadRequestException("El año debe ser un numero positivo");
 		}
 		
-		if(book.getRate() == null || book.getRate() > 0) {
+		if(book.getRate() == null || book.getRate() < 0.) {
 			throw new BadRequestException("La valoración no puede ser negativa");
 		}
 		
-		if(book.getPagNumber() == null || book.getPagNumber() > 0) {
+		if(book.getPagNumber() == null || book.getPagNumber() < 0) {
 			throw new BadRequestException("La valoración no puede ser negativa");
 		}
 		
@@ -153,25 +150,25 @@ public class BookResource {
 			throw new NotFoundException("No se ha encontrado la canción con Id: " + book.getId());
 		}
 		
-		if(book.getGenre() != null) {
-			oldBook.setGenre(book.getGenre());
-		}
-		if(book.getAuthor() != null) {
-			oldBook.setAuthor(book.getAuthor());
-		}
-		if(book.getTitle() != null ) {
+		if(book.getTitle() != null || book.getTitle().isEmpty()) {
 			oldBook.setTitle(book.getTitle());
 		}
-		if(book.getYear() != null) {
+		if(book.getAuthor() != null || book.getAuthor().isEmpty()) {
+			oldBook.setAuthor(book.getAuthor());
+		}
+		if(book.getGenre() != null || book.getGenre().isEmpty()) {
+			oldBook.setGenre(book.getGenre());
+		}
+		if(book.getYear() != null || book.getYear() < 0) {
 			oldBook.setYear(book.getYear());
 		}
-		if(book.getRate() != null) {
+		if(book.getRate() != null || book.getRate() < 0.) {
 			oldBook.setRate(book.getRate());
 		}
-		if(book.getPagNumber() != null) {
+		if(book.getPagNumber() != null || book.getPagNumber() < 0) {
 			oldBook.setPagNumber(book.getPagNumber());
 		}
-		if(book.getPublisher() != null) {
+		if(book.getPublisher() != null || book.getPublisher().isEmpty()) {
 			oldBook.setPublisher(book.getPublisher());
 		}
 		
