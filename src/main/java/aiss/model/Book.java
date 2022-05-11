@@ -94,7 +94,7 @@ public class Book {
 		return publisher;
 	}
 	
-	public void getPublisher(String publisher) {
+	public void setPublisher(String publisher) {
 		this.publisher = publisher;
 	}
 

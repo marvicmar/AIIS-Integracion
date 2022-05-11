@@ -4,16 +4,16 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import aiss.model.Playlist;
+import aiss.model.Booklist;
 import aiss.model.Book;
 
 
-public class MapBooklistRepository implements PlaylistRepository{
+public class MapBooklistRepository implements BooklistRepository{
 
-	Map<String, Playlist> playlistMap;
+	Map<String, Booklist> booklistMap;
 	Map<String, Book> bookMap;
 	private static MapBooklistRepository instance=null;
-	private int index=0;			// Index to create playlists and songs' identifiers.
+	private int index=0;			// Index to create Booklists and Books' identifiers.
 	
 	
 	public static MapBooklistRepository getInstance() {
@@ -28,7 +28,7 @@ public class MapBooklistRepository implements PlaylistRepository{
 	
 	public void init() {
 		
-		playlistMap = new HashMap<String,Playlist>();
+		booklistMap = new HashMap<String,Booklist>();
 		bookMap = new HashMap<String,Book>();
 		
 		// Create books
@@ -36,17 +36,17 @@ public class MapBooklistRepository implements PlaylistRepository{
 		fundamentalsOfWavelets.setTitle("Fundamentals of Wavelets");
 		fundamentalsOfWavelets.setAuthor("Goswami, Jaideva");
 		fundamentalsOfWavelets.setGenre("signal_processing");
-		fundamentalsOfWavelets.setYear(0);
+		fundamentalsOfWavelets.setYear("1956");
 		fundamentalsOfWavelets.setRate(0);
 		fundamentalsOfWavelets.setPagNumber(228);
 		fundamentalsOfWavelets.setPublisher("Wiley");
-		addSong(fundamentalsOfWavelets);
+		addBook(fundamentalsOfWavelets);
 		
 		Book dataSmart=new Book();
 		dataSmart.setTitle("Data Smart");
 		dataSmart.setAuthor("Foreman, John");
 		dataSmart.setGenre("data_science");
-		dataSmart.setYear(0);
+		dataSmart.setYear("1986");
 		dataSmart.setRate(0);
 		dataSmart.setPagNumber(235);
 		dataSmart.setPublisher("Wiley");
@@ -56,8 +56,8 @@ public class MapBooklistRepository implements PlaylistRepository{
 		godCreatedTheIntegers.setTitle("God Created the Integers");
 		godCreatedTheIntegers.setAuthor("Hawking, Stephen");
 		godCreatedTheIntegers.setGenre("mathematics");
-		godCreatedTheIntegers.setYear(0);
-		godCreatedTheIntegers.setRate();
+		godCreatedTheIntegers.setYear("1909");
+		godCreatedTheIntegers.setRate(0);
 		godCreatedTheIntegers.setPagNumber(197);
 		godCreatedTheIntegers.setPublisher("Penguin");
 		addBook(godCreatedTheIntegers);
@@ -66,120 +66,124 @@ public class MapBooklistRepository implements PlaylistRepository{
 		Superfreakonomics.setTitle("Superfreakonomics");
 		Superfreakonomics.setAuthor("Dubner, Stephen");
 		Superfreakonomics.setGenre("economics");
-		Superfreakonomics.setYear(0);
+		Superfreakonomics.setYear("1980");
 		Superfreakonomics.setRate(0);
 		Superfreakonomics.setPagNumber(179);
 		Superfreakonomics.setPublisher("HarperCollins");
 		addBook(Superfreakonomics);
 		
-		Book Orientalism=new Book();
-		Orientalism.setTitle("Orientalism");
-		Orientalism.setAuthor("Said, Edward");
-		Orientalism.setGenre("history");
-		Orientalism.setYear(0);
-		Orientalism.setRate(0);
-		Orientalism.setPagNumber(197);
-		Orientalism.setPublisher("Penguin");
-		addBook(Orientalism);
+		Book orientalism=new Book();
+		orientalism.setTitle("Orientalism");
+		orientalism.setAuthor("Said, Edward");
+		orientalism.setGenre("history");
+		orientalism.setYear("1989");
+		orientalism.setRate(0);
+		orientalism.setPagNumber(197);
+		orientalism.setPublisher("Penguin");
+		addBook(orientalism);
 		
-		// Create playlists
-		Playlist japlaylist=new Playlist();
-		japlaylist.setName("AISSPlayList");
-		japlaylist.setDescription("AISS PlayList");
-		addPlaylist(japlaylist);
+		// Create Booklists
+		Booklist jaBooklist=new Booklist();
+		jaBooklist.setName("AISSBooklist");
+		jaBooklist.setDescription("AISS Booklist");
+		addBooklist(jaBooklist);
 		
-		Playlist playlist = new Playlist();
-		playlist.setName("Favourites");
-		playlist.setDescription("A sample playlist");
-		addPlaylist(playlist);
+		Booklist booklist = new Booklist();
+		booklist.setName("Favourites");
+		booklist.setDescription("A sample Booklist");
+		addBooklist(booklist);
 		
-		// Add songs to playlists
-		addSong(japlaylist.getId(), rollingInTheDeep.getId());
-		addSong(japlaylist.getId(), one.getId());
-		addSong(japlaylist.getId(), smellLikeTeenSpirit.getId());
-		addSong(japlaylist.getId(), losingMyReligion.getId());
+		// Add Books to Booklists
+		addBook(jaBooklist.getId(), rollingInTheDeep.getId());
+		addBook(jaBooklist.getId(), one.getId());
+		addBook(jaBooklist.getId(), smellLikeTeenSpirit.getId());
+		addBook(jaBooklist.getId(), losingMyReligion.getId());
 		
-		addSong(playlist.getId(), losingMyReligion.getId());
-		addSong(playlist.getId(), gotye.getId());
+		addBook(booklist.getId(), losingMyReligion.getId());
+		addBook(booklist.getId(), gotye.getId());
 	}
 	
-	// Playlist related operations
+	// Booklist related operations
 	@Override
-	public void addPlaylist(Playlist p) {
+	public void addBooklist(Booklist p) {
 		String id = "p" + index++;	
 		p.setId(id);
-		playlistMap.put(id,p);
+		booklistMap.put(id,p);
 	}
 	
 	@Override
-	public Collection<Playlist> getAllPlaylists() {
-			return playlistMap.values();
+	public Collection<Booklist> getAllBooklists() {
+			return booklistMap.values();
 	}
 
 	@Override
-	public Playlist getPlaylist(String id) {
-		return playlistMap.get(id);
+	public Booklist getBooklist(String id) {
+		return booklistMap.get(id);
 	}
 	
 	@Override
-	public void updatePlaylist(Playlist p) {
-		playlistMap.put(p.getId(),p);
+	public void updateBooklist(Booklist p) {
+		booklistMap.put(p.getId(),p);
 	}
 
 	@Override
-	public void deletePlaylist(String id) {	
-		playlistMap.remove(id);
+	public void deleteBooklist(String id) {	
+		booklistMap.remove(id);
 	}
 	
 
 	@Override
-	public void addSong(String playlistId, String songId) {
-		Playlist playlist = getPlaylist(playlistId);
-		playlist.addSong(songMap.get(songId));
+	public void addBook(String BooklistId, String bookId) {
+		Booklist booklist = getBooklist(BooklistId);
+		booklist.addBook(bookMap.get(bookId));
 	}
 
 	@Override
-	public Collection<Song> getAll(String playlistId) {
-		return getPlaylist(playlistId).getSongs();
+	public Collection<Book> getAll(String BooklistId) {
+		return getBooklist(BooklistId).getBooks();
 	}
 
 	@Override
-	public void removeSong(String playlistId, String songId) {
-		getPlaylist(playlistId).deleteSong(songId);
+	public void removeBook(String BooklistId, String bookId) {
+		getBooklist(BooklistId).deleteBook(bookId);
 	}
 
 	
-	// Song related operations
+	// Book related operations
 	
 	@Override
-	public void addSong(Song s) {
+	public void addBook(Book s) {
 		String id = "s" + index++;
 		s.setId(id);
-		songMap.put(id, s);
+		bookMap.put(id, s);
 	}
 	
 	@Override
-	public Collection<Song> getAllSongs() {
-			return songMap.values();
+	public Collection<Book> getAllBooks() {
+			return bookMap.values();
 	}
 
 	@Override
-	public Song getSong(String songId) {
-		return songMap.get(songId);
+	public Book getBook(String bookId) {
+		return bookMap.get(bookId);
 	}
 
 	@Override
-	public void updateSong(Song s) {
-		Song song = songMap.get(s.getId());
-		song.setTitle(s.getTitle());
-		song.setAlbum(s.getAlbum());
-		song.setArtist(s.getArtist());
-		song.setYear(s.getYear());
+	public void updateBook(Book s) {
+		Book book = bookMap.get(s.getId());
+		book.setTitle(s.getTitle());
+		book.setAuthor(s.getAuthor());
+		book.setGenre(s.getGenre());
+		book.setYear(s.getYear());
+		book.setPagNumber(s.getPagNumber());
+		book.setRate(s.getRate());
+		book.setPublisher(s.getPublisher());
+		
 	}
 
 	@Override
-	public void deleteSong(String songId) {
-		songMap.remove(songId);
+	public void deleteBook(String bookId) {
+		bookMap.remove(bookId);
 	}
 	
 }

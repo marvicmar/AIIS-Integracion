@@ -18,12 +18,14 @@ public interface BooklistRepository {
 	// Playlists
 	public void addPlaylist(Booklist p);
 	public Collection<Booklist> getAllBooklists();
-	public Booklist getBookList(String BooklistId);
-	public void updateBookList(Booklist p);
-	public void deleteBookList(String BooklistId);
+	public Booklist getBooklist(String BooklistId);
+	public void updateBooklist(Booklist p);
+	public void deleteBooklist(String BooklistId);
 	public Collection<Book> getAll(String BooklistId);
 	public void addBook(String BooklistId, String bookId);
-	public void removeBook(String BooklistId, String bookId); 
+	public void removeBook(String BooklistId, String bookId);
+	public void addBooklist(Booklist p);
+
 
 	
 	
