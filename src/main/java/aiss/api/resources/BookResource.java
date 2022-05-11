@@ -21,7 +21,8 @@ import javax.ws.rs.core.UriBuilder;
 
 import aiss.model.Book;
 import aiss.model.repository.BooklistRepository;
-import aiss.model.repository.MapPlaylistRepository;
+import aiss.model.repository.MapBooklistRepository;
+
 
 
 import java.net.URI;
@@ -40,7 +41,7 @@ public class BookResource {
 	BooklistRepository repository;
 	
 	private BookResource(){
-		repository=MapPlaylistRepository.getInstance();
+		repository=MapBooklistRepository.getInstance();
 	}
 	
 	public static BookResource getInstance()
@@ -61,8 +62,12 @@ public class BookResource {
 		for(Book book: repository.getAllBooks()) {
 			if(q == null || q.isBlank() 
 					|| book.getTitle().toLowerCase().contains(q.toLowerCase()) 
-					|| book.getGenre().toLowerCase().contains(q.toLowerCase()) 
-					|| book.getAuthor().toLowerCase().contains(q.toLowerCase())) {
+					|| book.getAuthor().toLowerCase().contains(q.toLowerCase()) 
+					|| book.getGenre().toLowerCase().contains(q.toLowerCase()) 	
+					|| book.getYear() > 0  
+					|| book.getRate() > 0.
+					|| book.getPagNumber() > 0
+					|| book.getPublisher().toLowerCase().contains(q.toLowerCase())){
 				result.add(book);
 			}
 		}
@@ -112,8 +117,20 @@ public class BookResource {
 		if(book.getAuthor() == null || book.getAuthor().isEmpty()) {
 			throw new BadRequestException("Debes pasar un autor");
 		}
-		if(book.getYear() == null || book.getYear().isEmpty()) {
-			throw new BadRequestException("Debes pasar un año");
+		if(book.getYear() == null || book.getYear() > 0) {
+			throw new BadRequestException("El año debe ser un número positivo");
+		}
+		
+		if(book.getRate() == null || book.getRate() > 0) {
+			throw new BadRequestException("La valoración no puede ser negativa");
+		}
+		
+		if(book.getPagNumber() == null || book.getPagNumber() > 0) {
+			throw new BadRequestException("La valoración no puede ser negativa");
+		}
+		
+		if(book.getPublisher() == null || book.getPublisher().isEmpty()) {
+			throw new BadRequestException("Debes pasar un Publisher");
 		}
 		
 		repository.addBook(book);
@@ -147,6 +164,15 @@ public class BookResource {
 		}
 		if(book.getYear() != null) {
 			oldBook.setYear(book.getYear());
+		}
+		if(book.getRate() != null) {
+			oldBook.setRate(book.getRate());
+		}
+		if(book.getPagNumber() != null) {
+			oldBook.setPagNumber(book.getPagNumber());
+		}
+		if(book.getPublisher() != null) {
+			oldBook.setPublisher(book.getPublisher());
 		}
 		
 		

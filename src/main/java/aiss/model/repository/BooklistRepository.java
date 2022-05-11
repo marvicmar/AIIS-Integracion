@@ -16,20 +16,12 @@ public interface BooklistRepository {
 	public void deleteBook(String bookId);
 	
 	// Playlists
-	public void addPlaylist(Booklist p);
+	public void addBooklist(Booklist p);
 	public Collection<Booklist> getAllBooklists();
 	public Booklist getBooklist(String BooklistId);
 	public void updateBooklist(Booklist p);
 	public void deleteBooklist(String BooklistId);
 	public Collection<Book> getAll(String BooklistId);
 	public void addBook(String BooklistId, String bookId);
-	public void removeBook(String BooklistId, String bookId);
-	public void addBooklist(Booklist p);
-
-
-	
-	
-	
-	
-
+	public void removeBook(String BooklistId, String bookId); 
 }

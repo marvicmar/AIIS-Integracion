@@ -30,7 +30,7 @@ import org.jboss.resteasy.spi.NotFoundException;
 import aiss.model.Book;
 import aiss.model.Booklist;
 import aiss.model.repository.BooklistRepository;
-import aiss.model.repository.MapbooklistRepository;
+import aiss.model.repository.MapBooklistRepository;
 import javassist.expr.NewArray;
 
 @Path("/books")
@@ -41,7 +41,7 @@ public class BooklistResource {
 	BooklistRepository repository;
 	
 	private BooklistResource() {
-		repository=MapbooklistRepository.getInstance();
+		repository=MapBooklistRepository.getInstance();
 
 	}
 	
@@ -59,10 +59,10 @@ public class BooklistResource {
 	{
 		List<Booklist> result = new ArrayList<Booklist>();
 		System.out.println(desc);
-		for(Booklist booklist: repository.getAllBooklist()) {
-			if(isEmpty == null || (isEmpty && (booklist.getbooks() == null 
-					|| booklist.getbooks().size() == 0) ) 
-					|| (!isEmpty && (booklist.getbooks() != null && booklist.getbooks().size() > 0))) {
+		for(Booklist booklist: repository.getAllBooklists()) {
+			if(isEmpty == null || (isEmpty && (booklist.getBooks() == null 
+					|| booklist.getBooks().size() == 0) ) 
+					|| (!isEmpty && (booklist.getBooks() != null && booklist.getBooks().size() > 0))) {
 				if(nombre == null || booklist.getName().contains(nombre)) {
 					result.add(booklist);
 				}
@@ -122,7 +122,7 @@ public class BooklistResource {
 			throw new NotFoundException("The booklist with id="+ booklist.getId() +" was not found");			
 		}
 		
-		if (booklist.getbooks()!=null)
+		if (booklist.getBooks()!=null)
 			throw new BadRequestException("The books property is not editable.");
 		
 		// Update name
@@ -192,7 +192,7 @@ public class BooklistResource {
 			throw new NotFoundException("The book with id=" + bookId + " was not found");
 		
 		
-		repository.removebook(booklistId, bookId);		
+		repository.removeBook(booklistId, bookId);		
 		
 		return Response.noContent().build();
 	}

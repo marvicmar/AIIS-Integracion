@@ -13,7 +13,7 @@ public class MapBooklistRepository implements BooklistRepository{
 	Map<String, Booklist> booklistMap;
 	Map<String, Book> bookMap;
 	private static MapBooklistRepository instance=null;
-	private int index=0;			// Index to create Booklists and Books' identifiers.
+	private int index=0;
 	
 	
 	public static MapBooklistRepository getInstance() {
@@ -36,8 +36,8 @@ public class MapBooklistRepository implements BooklistRepository{
 		fundamentalsOfWavelets.setTitle("Fundamentals of Wavelets");
 		fundamentalsOfWavelets.setAuthor("Goswami, Jaideva");
 		fundamentalsOfWavelets.setGenre("signal_processing");
-		fundamentalsOfWavelets.setYear("1956");
-		fundamentalsOfWavelets.setRate(0);
+		fundamentalsOfWavelets.setYear(0);
+		fundamentalsOfWavelets.setRate(0.);
 		fundamentalsOfWavelets.setPagNumber(228);
 		fundamentalsOfWavelets.setPublisher("Wiley");
 		addBook(fundamentalsOfWavelets);
@@ -46,8 +46,8 @@ public class MapBooklistRepository implements BooklistRepository{
 		dataSmart.setTitle("Data Smart");
 		dataSmart.setAuthor("Foreman, John");
 		dataSmart.setGenre("data_science");
-		dataSmart.setYear("1986");
-		dataSmart.setRate(0);
+		dataSmart.setYear(0);
+		dataSmart.setRate(0.);
 		dataSmart.setPagNumber(235);
 		dataSmart.setPublisher("Wiley");
 		addBook(dataSmart);
@@ -56,8 +56,8 @@ public class MapBooklistRepository implements BooklistRepository{
 		godCreatedTheIntegers.setTitle("God Created the Integers");
 		godCreatedTheIntegers.setAuthor("Hawking, Stephen");
 		godCreatedTheIntegers.setGenre("mathematics");
-		godCreatedTheIntegers.setYear("1909");
-		godCreatedTheIntegers.setRate(0);
+		godCreatedTheIntegers.setYear(0);
+		godCreatedTheIntegers.setRate(0.);
 		godCreatedTheIntegers.setPagNumber(197);
 		godCreatedTheIntegers.setPublisher("Penguin");
 		addBook(godCreatedTheIntegers);
@@ -66,47 +66,47 @@ public class MapBooklistRepository implements BooklistRepository{
 		Superfreakonomics.setTitle("Superfreakonomics");
 		Superfreakonomics.setAuthor("Dubner, Stephen");
 		Superfreakonomics.setGenre("economics");
-		Superfreakonomics.setYear("1980");
-		Superfreakonomics.setRate(0);
+		Superfreakonomics.setYear(0);
+		Superfreakonomics.setRate(0.);
 		Superfreakonomics.setPagNumber(179);
 		Superfreakonomics.setPublisher("HarperCollins");
 		addBook(Superfreakonomics);
 		
-		Book orientalism=new Book();
-		orientalism.setTitle("Orientalism");
-		orientalism.setAuthor("Said, Edward");
-		orientalism.setGenre("history");
-		orientalism.setYear("1989");
-		orientalism.setRate(0);
-		orientalism.setPagNumber(197);
-		orientalism.setPublisher("Penguin");
-		addBook(orientalism);
+		Book Orientalism=new Book();
+		Orientalism.setTitle("Orientalism");
+		Orientalism.setAuthor("Said, Edward");
+		Orientalism.setGenre("history");
+		Orientalism.setYear(0);
+		Orientalism.setRate(0.);
+		Orientalism.setPagNumber(197);
+		Orientalism.setPublisher("Penguin");
+		addBook(Orientalism);
 		
-		// Create Booklists
-		Booklist jaBooklist=new Booklist();
-		jaBooklist.setName("AISSBooklist");
-		jaBooklist.setDescription("AISS Booklist");
-		addBooklist(jaBooklist);
+		// Create booklists
+		Booklist booklist1=new Booklist();
+		booklist1.setName("AISSBookList");
+		booklist1.setDescription("AISS Book List");
+		addBooklist(booklist1);
 		
-		Booklist booklist = new Booklist();
-		booklist.setName("Favourites");
-		booklist.setDescription("A sample Booklist");
-		addBooklist(booklist);
+		Booklist booklist2 = new Booklist();
+		booklist2.setName("Favourites");
+		booklist2.setDescription("A sample booklist");
+		addBooklist(booklist2);
 		
-		// Add Books to Booklists
-		addBook(jaBooklist.getId(), rollingInTheDeep.getId());
-		addBook(jaBooklist.getId(), one.getId());
-		addBook(jaBooklist.getId(), smellLikeTeenSpirit.getId());
-		addBook(jaBooklist.getId(), losingMyReligion.getId());
+		// Add books to booklists
+		addBook(booklist1.getId(), fundamentalsOfWavelets.getId());
+		addBook(booklist1.getId(), dataSmart.getId());
+		addBook(booklist1.getId(), godCreatedTheIntegers.getId());
+		addBook(booklist1.getId(), Superfreakonomics.getId());
 		
-		addBook(booklist.getId(), losingMyReligion.getId());
-		addBook(booklist.getId(), gotye.getId());
+		addBook(booklist2.getId(), Superfreakonomics.getId());
+		addBook(booklist2.getId(), Orientalism.getId());
 	}
 	
 	// Booklist related operations
 	@Override
 	public void addBooklist(Booklist p) {
-		String id = "p" + index++;	
+		String id = "b" + index++;	
 		p.setId(id);
 		booklistMap.put(id,p);
 	}
@@ -130,24 +130,22 @@ public class MapBooklistRepository implements BooklistRepository{
 	public void deleteBooklist(String id) {	
 		booklistMap.remove(id);
 	}
-	
 
 	@Override
-	public void addBook(String BooklistId, String bookId) {
-		Booklist booklist = getBooklist(BooklistId);
-		booklist.addBook(bookMap.get(bookId));
+	public void addBook(String playlistId, String songId) {
+		Booklist playlist = getBooklist(playlistId);
+		playlist.addBook(bookMap.get(songId));
 	}
 
 	@Override
-	public Collection<Book> getAll(String BooklistId) {
-		return getBooklist(BooklistId).getBooks();
+	public Collection<Book> getAll(String playlistId) {
+		return getBooklist(playlistId).getBooks();
 	}
 
 	@Override
-	public void removeBook(String BooklistId, String bookId) {
-		getBooklist(BooklistId).deleteBook(bookId);
+	public void removeBook(String playlistId, String songId) {
+		getBooklist(playlistId).deleteBook(songId);
 	}
-
 	
 	// Book related operations
 	
@@ -175,10 +173,9 @@ public class MapBooklistRepository implements BooklistRepository{
 		book.setAuthor(s.getAuthor());
 		book.setGenre(s.getGenre());
 		book.setYear(s.getYear());
-		book.setPagNumber(s.getPagNumber());
 		book.setRate(s.getRate());
+		book.setPagNumber(s.getPagNumber());
 		book.setPublisher(s.getPublisher());
-		
 	}
 
 	@Override

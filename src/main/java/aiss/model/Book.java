@@ -6,8 +6,8 @@ public class Book {
 	private String title;
 	private String author;
 	private String genre;
-	private String year;
-	private Integer rate;
+	private Integer year;
+	private Double rate;
 	private Integer pagNumber;
 	private String publisher;
 	
@@ -15,21 +15,23 @@ public class Book {
 	public Book() {
 	}
 
-	public Book(String title, String author, String genre, String year, Integer pagNumber, String publisher) {
+	public Book(String title, String author, String genre, Integer year, Double rate ,Integer pagNumber, String publisher) {
 		this.title = title;
 		this.author = author;
 		this.genre = genre;
 		this.year = year;
+		this.rate = rate;
 		this.pagNumber = pagNumber;
 		this.publisher = publisher;
 	}
 	
-	public Book(String id, String title, String author, String genre, String year, Integer pagNumber, String publisher) {
+	public Book(String id, String title, String author, String genre, Integer year, Double rate, Integer pagNumber, String publisher) {
 		this.id=id;
 		this.title = title;
 		this.author = author;
 		this.genre = genre;
 		this.year = year;
+		this.rate = rate;
 		this.pagNumber = pagNumber;
 		this.publisher = publisher;
 	}
@@ -66,19 +68,19 @@ public class Book {
 		this.genre = genre;
 	}
 
-	public String getYear() {
+	public Integer getYear() {
 		return year;
 	}
 
-	public void setYear(String year) {
+	public void setYear(Integer year) {
 		this.year = year;
 	}
 	
-	public Integer  getRate() {
+	public Double  getRate() {
 		return rate;
 	}
 	
-	public void setRate(Integer rate) {
+	public void setRate(Double rate) {
 		this.rate = rate;
 	}
 	
