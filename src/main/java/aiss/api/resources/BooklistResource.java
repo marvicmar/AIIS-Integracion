@@ -29,23 +29,19 @@ import org.jboss.resteasy.spi.NotFoundException;
 
 import aiss.model.Book;
 import aiss.model.Booklist;
-import aiss.model.repository.MapPlaylistRepository;
-import aiss.model.repository.PlaylistRepository;
+import aiss.model.repository.BooklistRepository;
+import aiss.model.repository.MapbooklistRepository;
 import javassist.expr.NewArray;
 
-
-
-
-
-@Path("/lists")
+@Path("/books")
 public class BooklistResource {
 	
 	/* Singleton */
 	private static BooklistResource _instance=null;
-	PlaylistRepository repository;
+	BooklistRepository repository;
 	
 	private BooklistResource() {
-		repository=MapPlaylistRepository.getInstance();
+		repository=MapbooklistRepository.getInstance();
 
 	}
 	
@@ -63,12 +59,12 @@ public class BooklistResource {
 	{
 		List<Booklist> result = new ArrayList<Booklist>();
 		System.out.println(desc);
-		for(Booklist playList: repository.getAllBooklist()) {
-			if(isEmpty == null || (isEmpty && (playList.getSongs() == null 
-					|| playList.getSongs().size() == 0) ) 
-					|| (!isEmpty && (playList.getSongs() != null && playList.getSongs().size() > 0))) {
-				if(nombre == null || playList.getName().contains(nombre)) {
-					result.add(playList);
+		for(Booklist booklist: repository.getAllBooklist()) {
+			if(isEmpty == null || (isEmpty && (booklist.getbooks() == null 
+					|| booklist.getbooks().size() == 0) ) 
+					|| (!isEmpty && (booklist.getbooks() != null && booklist.getbooks().size() > 0))) {
+				if(nombre == null || booklist.getName().contains(nombre)) {
+					result.add(booklist);
 				}
 			}
 		}
@@ -91,7 +87,7 @@ public class BooklistResource {
 		Booklist list = repository.getBooklist(id);
 		
 		if (list == null) {
-			throw new NotFoundException("The playlist with id="+ id +" was not found");			
+			throw new NotFoundException("The booklist with id="+ id +" was not found");			
 		}
 		
 		return list;
@@ -100,103 +96,103 @@ public class BooklistResource {
 	@POST
 	@Consumes("application/json")
 	@Produces("application/json")
-	public Response addPlaylist(@Context UriInfo uriInfo, Booklist playlist) {
-		if (playlist.getName() == null || "".equals(playlist.getName()))
-			throw new BadRequestException("The name of the playlist must not be null");
+	public Response addBooklist(@Context UriInfo uriInfo, Booklist booklist) {
+		if (booklist.getName() == null || "".equals(booklist.getName()))
+			throw new BadRequestException("The name of the booklist must not be null");
 		
-		if (playlist.getSongs()!=null)
-			throw new BadRequestException("The songs property is not editable.");
+		if (booklist.getBooks()!=null)
+			throw new BadRequestException("The books property is not editable.");
 
-		repository.addBooklist(playlist);
+		repository.addBooklist(booklist);
 
-		// Builds the response. Returns the playlist the has just been added.
+		// Builds the response. Returns the booklist the has just been added.
 		UriBuilder ub = uriInfo.getAbsolutePathBuilder().path(this.getClass(), "get");
-		URI uri = ub.build(playlist.getId());
+		URI uri = ub.build(booklist.getId());
 		ResponseBuilder resp = Response.created(uri);
-		resp.entity(playlist);			
+		resp.entity(booklist);			
 		return resp.build();
 	}
 
 	
 	@PUT
 	@Consumes("application/json")
-	public Response updatePlaylist(Booklist playlist) {
-		Booklist oldplaylist = repository.getPlaylist(playlist.getId());
-		if (oldplaylist == null) {
-			throw new NotFoundException("The playlist with id="+ playlist.getId() +" was not found");			
+	public Response updateBooklist(Booklist booklist) {
+		Booklist oldbooklist = repository.getBooklist(booklist.getId());
+		if (oldbooklist == null) {
+			throw new NotFoundException("The booklist with id="+ booklist.getId() +" was not found");			
 		}
 		
-		if (playlist.getSongs()!=null)
-			throw new BadRequestException("The songs property is not editable.");
+		if (booklist.getbooks()!=null)
+			throw new BadRequestException("The books property is not editable.");
 		
 		// Update name
-		if (playlist.getName()!=null)
-			oldplaylist.setName(playlist.getName());
+		if (booklist.getName()!=null)
+			oldbooklist.setName(booklist.getName());
 		
 		// Update description
-		if (playlist.getDescription()!=null)
-			oldplaylist.setDescription(playlist.getDescription());
+		if (booklist.getDescription()!=null)
+			oldbooklist.setDescription(booklist.getDescription());
 		
 		return Response.noContent().build();
 	}
 	
 	@DELETE
 	@Path("/{id}")
-	public Response removePlaylist(@PathParam("id") String id) {
+	public Response removeBooklist(@PathParam("id") String id) {
 		Booklist toberemoved=repository.getBooklist(id);
 		if (toberemoved == null)
-			throw new NotFoundException("The playlist with id="+ id +" was not found");
+			throw new NotFoundException("The booklist with id="+ id +" was not found");
 		else
-			repository.deletePlaylist(id);
+			repository.deleteBooklist(id);
 		
 		return Response.noContent().build();
 	}
 	
 	
 	@POST	
-	@Path("/{playlistId}/{songId}")
+	@Path("/{booklistId}/{bookId}")
 	@Consumes("text/plain")
 	@Produces("application/json")
-	public Response addSong(@Context UriInfo uriInfo,@PathParam("playlistId") String playlistId, @PathParam("songId") String songId)
+	public Response addBook(@Context UriInfo uriInfo,@PathParam("booklistId") String booklistId, @PathParam("bookId") String bookId)
 	{				
 		
-		Booklist playlist = repository.getBooklist(playlistId);
-		Book song = repository.getBook(songId);
+		Booklist booklist = repository.getBooklist(booklistId);
+		Book book = repository.getBook(bookId);
 		
-		if (playlist==null)
-			throw new NotFoundException("The playlist with id=" + playlistId + " was not found");
+		if (booklist==null)
+			throw new NotFoundException("The booklist with id=" + booklistId + " was not found");
 		
-		if (song == null)
-			throw new NotFoundException("The song with id=" + songId + " was not found");
+		if (book == null)
+			throw new NotFoundException("The book with id=" + bookId + " was not found");
 		
-		if (playlist.getSong(songId)!=null)
-			throw new BadRequestException("The song is already included in the playlist.");
+		if (booklist.getBook(bookId)!=null)
+			throw new BadRequestException("The book is already included in the booklist.");
 			
-		repository.addSong(playlistId, songId);		
+		repository.addBook(booklistId, bookId);		
 
 		// Builds the response
 		UriBuilder ub = uriInfo.getAbsolutePathBuilder().path(this.getClass(), "get");
-		URI uri = ub.build(playlistId);
+		URI uri = ub.build(booklistId);
 		ResponseBuilder resp = Response.created(uri);
-		resp.entity(playlist);			
+		resp.entity(booklist);			
 		return resp.build();
 	}
 	
 	
 	@DELETE
-	@Path("/{playlistId}/{songId}")
-	public Response removeSong(@PathParam("playlistId") String playlistId, @PathParam("songId") String songId) {
-		Booklist playlist = repository.getBooklist(playlistId);
-		Book song = repository.getBook(songId);
+	@Path("/{booklistId}/{bookId}")
+	public Response removebook(@PathParam("booklistId") String booklistId, @PathParam("bookId") String bookId) {
+		Booklist booklist = repository.getBooklist(booklistId);
+		Book book = repository.getBook(bookId);
 		
-		if (playlist==null)
-			throw new NotFoundException("The playlist with id=" + playlistId + " was not found");
+		if (booklist==null)
+			throw new NotFoundException("The booklist with id=" + booklistId + " was not found");
 		
-		if (song == null)
-			throw new NotFoundException("The song with id=" + songId + " was not found");
+		if (book == null)
+			throw new NotFoundException("The book with id=" + bookId + " was not found");
 		
 		
-		repository.removeSong(playlistId, songId);		
+		repository.removebook(booklistId, bookId);		
 		
 		return Response.noContent().build();
 	}
