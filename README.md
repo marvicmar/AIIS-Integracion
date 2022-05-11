@@ -1,8 +1,6 @@
-# Implementación de una API REST 
+# Implementación de una API REST  
 
-Práctica 5 de la asignatura AISS
-
-La API REST estará formada por dos recursos que permitirán manipular listas de reproducción y canciones respectivamente. 
+La API REST estará formada por dos recursos que permitirán manipular colecciones de libros y libros respectivamente. 
 
 El contrato de servicios de listas de reproducción se detalla a continuación. No todas las opciones han sido implementadas en el código proporcionado. El objetivo de esta práctica es se implementen todos los métodos necesarios para que la API funcione como se detalla a continuación. 
 
@@ -15,7 +13,7 @@ El contrato de servicios de listas de reproducción se detalla a continuación. 
 | PUT | /song  | Actualiza la canción cuyos datos se pasan en el cuerpo de la petición en formato JSON (deben incluir el id de la canción). Si la canción no existe, devuelve un “404 Not Found”. Si se realiza correctamente, devuelve “204 No Content”. |
 | DELETE | /song/{songId}  |  Elimina la canción con id=songId. Si la canción no existe, devuelve un “404 Not Found”. Si se realiza correctamente, devuelve “204 No Content”.|
 
-Cada **canción** tiene un identificador, _título, nombre del artista, álbum y año_. La representación JSON del recurso es:
+Cada **canción** tiene un id,tittle, nombre del autor, genre, year, rate,pag number y publisher. La representación JSON del recurso es:
 
 ```cpp
 {
