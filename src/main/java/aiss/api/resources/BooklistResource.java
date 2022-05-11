@@ -96,11 +96,9 @@ public class BooklistResource {
 	@Consumes("application/json")
 	@Produces("application/json")
 	public Response addBooklist(@Context UriInfo uriInfo, Booklist booklist) {
-		if (booklist.getName() == null || "".equals(booklist.getName()))
+		if (booklist.getName() == null || booklist.getName().isEmpty())
 			throw new BadRequestException("The name of the booklist must not be null");
 		
-		if (booklist.getBooks()!=null)
-			throw new BadRequestException("The books property is not editable.");
 
 		repository.addBooklist(booklist);
 
@@ -120,9 +118,6 @@ public class BooklistResource {
 		if (oldbooklist == null) {
 			throw new NotFoundException("The booklist with id="+ booklist.getId() +" was not found");			
 		}
-		
-		if (booklist.getBooks()!=null)
-			throw new BadRequestException("The books property is not editable.");
 		
 		// Update name
 		if (booklist.getName()!=null)
