@@ -31,9 +31,8 @@ import aiss.model.Book;
 import aiss.model.Booklist;
 import aiss.model.repository.BooklistRepository;
 import aiss.model.repository.MapBooklistRepository;
-import javassist.expr.NewArray;
 
-@Path("/books")
+@Path("/booklist")
 public class BooklistResource {
 	
 	/* Singleton */
