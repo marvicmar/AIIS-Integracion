@@ -145,7 +145,7 @@ public class BooklistResource {
 	
 	@POST	
 	@Path("/{booklistId}/{bookId}")
-	@Consumes("text/plain")
+	@Consumes("application/json")
 	@Produces("application/json")
 	public Response addBook(@Context UriInfo uriInfo,@PathParam("booklistId") String booklistId, @PathParam("bookId") String bookId)
 	{				
