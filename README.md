@@ -2,26 +2,27 @@
 
 La API REST estará formada por dos recursos que permitirán manipular colecciones de libros y libros respectivamente. 
 
-El contrato de servicios de listas de reproducción se detalla a continuación. No todas las opciones han sido implementadas en el código proporcionado. El objetivo de esta práctica es se implementen todos los métodos necesarios para que la API funcione como se detalla a continuación. 
-
 ### Recurso Song ###
 | HTTP  | URI | Descripción |
 | ------------- | ------------- | ------------- |
-| GET |  /song | Devuelve todas las canciones de la aplicación. •	Es posible ordenar las canciones por el álbum o el artista con el parámetro de query “order”, que acepta los valores “album”, “-album”, “artist” o “-artist”. •	También es posible filtrar las canciones devueltas con el parámetro de query “q”, que devuelve aquellas canciones cuyo título, álbum o artista contengan la cadena enviada (ignorando mayúsculas y minúsculas).|
-| GET | /song/{songId}  |  Devuelve la canción con id=songId. Si la canción no existe devuelve un “404 Not Found”. |
-| POST | /song | Añade una nueva canción cuyos datos se pasan en el cuerpo de la petición en formato JSON (no se debe pasar id, se genera automáticamente). Si el nombre de la canción no es válido (null o vacío) devuelve un error “400 Bad Request”. Si se añade satisfactoriamente, devuelve “201 Created” con la referencia a la URI y el contenido de la canción. |
-| PUT | /song  | Actualiza la canción cuyos datos se pasan en el cuerpo de la petición en formato JSON (deben incluir el id de la canción). Si la canción no existe, devuelve un “404 Not Found”. Si se realiza correctamente, devuelve “204 No Content”. |
-| DELETE | /song/{songId}  |  Elimina la canción con id=songId. Si la canción no existe, devuelve un “404 Not Found”. Si se realiza correctamente, devuelve “204 No Content”.|
+| GET |  /books | Devuelve todas los libros de la aplicación.  • Es posible ordenar los libros por el género, el año o el autor con el parámetro de query “order”, que acepta los valores “genre”, “-genre”, “year”, “-year”, "author" o "-author". • También es posible filtrar los libros devueltos con el parámetro de query “q”, que devuelve aquellas canciones cuyo título, autor, genero o editorial contengan la cadena enviada (ignorando mayúsculas y minúsculas). |
+| GET | /books/{bookId}  |  Devuelve el libro con id=bookId. Si el libro no existe devuelve un “404 Not Found”. |
+| POST | /books | Añade un nuevo libro cuyos datos se pasan en el cuerpo de la petición en formato JSON (el id se genera automáticamente). Si el nombre del libro no es válido (null o vacío) devuelve un error “400 Bad Request”. Si se añade satisfactoriamente, devuelve “201 Created” con la referencia a la URI y el contenido del libro. |
+| PUT | /books  | Actualiza el libro cuyos datos se pasan en el cuerpo de la petición en formato JSON (deben incluir el id del libro). Si el libro no existe, devuelve un “404 Not Found”. Si se realiza correctamente, devuelve “204 No Content”. |
+| DELETE | /books/{bookId}  |  Elimina el libro con id=bookId. Si el libro no existe, devuelve un “404 Not Found”. Si se realiza correctamente, devuelve “204 No Content”.|
 
-Cada **canción** tiene un id,tittle, nombre del autor, genre, year, rate,pag number y publisher. La representación JSON del recurso es:
+Cada **libro** tiene un id, titulo, nombre del autor, genero, año de publicación, valoración, número de páginas y editorial. La representación JSON del recurso es:
 
 ```cpp
 {
-	"id":"s3",
-	"title":"Smell Like Teen Spirit",
-	"artist":"Nirvana",
-	"album":"Nevermind",
-	"year":"1991"
+	"id":"s0",
+	"title":"Fundamentals of Wavelets",
+	"author":"Goswami, Jaideva",
+	"genre":"signal_processing",
+	"year":"0",
+	"rate":"0.",
+	"pagnumber":"228",
+	"publisher":"Wiley"
 }
 ```
 
@@ -29,37 +30,43 @@ Cada **canción** tiene un id,tittle, nombre del autor, genre, year, rate,pag nu
 ### Recurso Playlist ###
 | HTTP  | URI | Descripción |
 | ------------- | ------------- | ------------- |
-| GET | /lists  | Ver todas las listas de reproducción existentes. •	Es posible ordenar las listas por nombre con el parámetro de query “order”, que solo acepta dos valores, “name” o “-name”. •	También es posible filtrar las listas devueltas con dos parámetros de query: “isEmpty”, que devuelve listas sin canciones si vale “true” o listas con canciones si vale “false”; “name”, que devuelve las listas cuyo nombre coincida exactamente con el valor del parámetro. |
-| GET | /lists/{playlistId} | Devuelve la lista con id=playlistId. Si la lista no existe devuelve un “404 Not Found”. |
-| POST | /lists | Añadir una nueva lista de reproducción. Los datos de la lista (nombre y descripción) se proporcionan en el cuerpo de la petición en formato JSON. Las canciones de la lista no se pueden incluir aquí, para ello se debe usar  la operación POST específica para añadir una canción a una lista (a continuación). Si el nombre de la lista no es válido (nulo o vacío), o se intenta crear una lista con canciones, devuelve un error “400 Bad Request”. Si se añade satisfactoriamente, devuelve “201 Created” con la referencia a la URI y el contenido de la lista. |
-| PUT | /lists | Actualiza la lista cuyos datos se pasan en el cuerpo de la petición en formato JSON (deben incluir el id de la lista).  Si la lista no existe, devuelve un “404 Not Found”. Si se intenta actualizar las canciones de la lista, devuelve un error “400 Bad Request”. Para actualizar las canciones se debe usar el recurso Song mostrado previamente. Si se realiza correctamente, devuelve “204 No Content”. |
-| DELETE | /lists/{playlistId} | Elimina la lista con id=playlistId. Si la lista no existe, devuelve un “404 Not Found”. Si se realiza correctamente, devuelve “204 No Content”. |
-| POST |  /lists/{playlistId}/{songId} | Añade la canción con id=songId a la lista con id=playlistId. Si la lista o la canción no existe, devuelve un “404 Not Found”. Si la canción ya está incluida en la lista devuelve un “400 Bad Request”. Si se añade satisfactoriamente, devuelve “201 Created” con la referencia a la URI y el contenido de la lista. |
-| DELETE | /lists/{playlistId}/{songId}  | Elimina la canción con id=songId de la lista con id=playlistId. Si la lista o la canción no existe, devuelve un “404 Not Found”. Si se realiza correctamente, devuelve “204 No Content”.|
+| GET | /bookslists  | Ver todas las listas de libros existentes. •	Es posible ordenar las listas de libros por nombre con el parámetro de query “order”, que solo acepta dos valores, “name” o “-name”. •	También es posible filtrar las listas de libros devueltas con dos parámetros de query: “isEmpty”, que devuelve listas sin libros si vale “true” o listas con libros si vale “false”; “name”, que devuelve las listas cuyo nombre coincida exactamente con el valor del parámetro. |
+| GET | /bookslists/{bookslistId} | Devuelve la lista con id=bookslistId. Si la lista de libros no existe devuelve un “404 Not Found”. |
+| POST | /bookslists | Añadir una nueva lista de libros. Los datos de la lista (nombre y descripción) se proporcionan en el cuerpo de la petición en formato JSON. Los libros de la lista se pueden incluir aquí opcionalmente. Si el nombre de la lista no es válido (nulo o vacío), devuelve un error “400 Bad Request”. Si se añade satisfactoriamente, devuelve “201 Created” con la referencia a la URI y el contenido de la lista. |
+| PUT | /bookslists | Actualiza la lista cuyos datos se pasan en el cuerpo de la petición en formato JSON (deben incluir el id de la lista).  Si la lista no existe, devuelve un “404 Not Found”. Si se intenta actualizar los libros de la lista, devuelve un error “400 Bad Request”. Para actualizar los libros se debe usar el recurso Book mostrado previamente. Si se realiza correctamente, devuelve “204 No Content”. |
+| DELETE | /bookslists/{bookslistId} | Elimina la lista con id=bookslistId. Si la lista no existe, devuelve un “404 Not Found”. Si se realiza correctamente, devuelve “204 No Content”. |
+| POST |  /bookslists/{bookslistId}/{bookId} | Añade el libro con id=bookId a la lista con id=bookslistId. Si la lista o el libro no existe, devuelve un “404 Not Found”. Si el libro ya está incluido en la lista devuelve un “400 Bad Request”. Si se añade satisfactoriamente, devuelve “201 Created” con la referencia a la URI y el contenido de la lista. |
+| DELETE | /bookslists/{bookslistId}/{bookId}  | Elimina el libro con id=bookId de la lista con id=bookslistId. Si la lista o el libro no existe, devuelve un “404 Not Found”. Si se realiza correctamente, devuelve “204 No Content”.|
 
 
-Una **lista de reproducción** tiene un _identificador, nombre, descripción y un conjunto de canciones_. La representación JSON de este recurso es:
+Una **lista de libros** tiene un _identificador, nombre, descripción y un conjunto de libros_. La representación JSON de este recurso es:
 
 ```cpp
 {
-	"id":"p5",
-	"name":"AISSPlayList",
-	"description":"AISS PlayList",
+	"id":"b1",
+	"name":"Favourites",
+	"description":"A sample booklist",
 	"songs":[
 		{
-			"id":"s0",
-			"title":"Rolling in the Deep",
-			"artist":"Adele",
-			"album":"21",
-			"year":"2011"
+			"id":"s3",
+			"title":"Superfreakonomics",
+			"author":"Dubner, Stephen",
+			"genre":"economics",
+			"year":"0",
+			"rate":"0.",
+			"pagnumber":"179",
+			"publisher":"HarperCollins"
 		},
 
 		{			
-			"id":"s1",
-			"title":"One",
-			"artist":"U2",
-			"album":"Achtung Baby",
-			"year":"1992"
+			"id":"s4",
+			"title":"Orientalism",
+			"author":"Said, Edward",
+			"genre":"history",
+			"year":"0",
+			"rate":"0.",
+			"pagnumber":"197",
+			"publisher":"Penguin"
 		}
 		]
 }
