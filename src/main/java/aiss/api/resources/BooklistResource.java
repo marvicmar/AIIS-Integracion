@@ -54,7 +54,7 @@ public class BooklistResource {
 
 	@GET
 	@Produces("application/json")
-	public Collection<Booklist> getAll(@QueryParam("IsEmpty") Boolean isEmpty, @QueryParam("desc") Boolean desc, @QueryParam("nombre") String nombre)
+	public Collection<Booklist> getAll(@QueryParam("IsEmpty") Boolean isEmpty, @QueryParam("desc") Boolean desc, @QueryParam("name") String name)
 	{
 		List<Booklist> result = new ArrayList<Booklist>();
 		System.out.println(desc);
@@ -62,10 +62,13 @@ public class BooklistResource {
 			if(isEmpty == null || (isEmpty && (booklist.getBooks() == null 
 					|| booklist.getBooks().size() == 0) ) 
 					|| (!isEmpty && (booklist.getBooks() != null && booklist.getBooks().size() > 0))) {
-				if(nombre == null || booklist.getName().contains(nombre)) {
+				if(name == null || booklist.getName().toLowerCase().contains(name.toLowerCase())) {
 					result.add(booklist);
 				}
 			}
+		
+			
+			
 		}
 		if(desc != null && desc) {
 			Collections.sort(result, Comparator.comparing(p -> p.getName()));
