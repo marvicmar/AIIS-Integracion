@@ -46,7 +46,7 @@ Una **lista de libros** tiene un _identificador, nombre, descripción y un conju
 	"id":"b1",
 	"name":"Favourites",
 	"description":"A sample booklist",
-	"songs":[
+	"books":[
 		{
 			"id":"s3",
 			"title":"Superfreakonomics",
