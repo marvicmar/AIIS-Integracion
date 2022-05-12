@@ -66,7 +66,6 @@ public class BookResource {
 					|| book.getGenre().toLowerCase().contains(name.toLowerCase())
 					|| book.getYear().toString().toLowerCase().contains(name.toLowerCase())
 					|| book.getRate().toString().toLowerCase().contains(name.toLowerCase()) 
-					|| book.getPagNumber().toString().toLowerCase().contains(name.toLowerCase()) 
 					|| book.getPublisher().toLowerCase().contains(name.toLowerCase())){
 				result.add(book);
 			}
@@ -80,7 +79,7 @@ public class BookResource {
 			} else if(order.equals(orders.get(1))) {
 				Collections.sort(result, Comparator.comparing(s -> s.getYear()));
 				//anadir la siguiente linea si lo queremos en orden descendente
-				//Collections.reverse(result);
+				Collections.reverse(result);
 			} else if(order.equals(orders.get(2))) {
 				Collections.sort(result, Comparator.comparing(s -> s.getAuthor()));
 			}else if(order.equals(orders.get(3))) {
@@ -88,7 +87,7 @@ public class BookResource {
 			}else if(order.equals(orders.get(4))) {
 				Collections.sort(result, Comparator.comparing(s -> s.getRate()));
 				//anadir la siguiente linea si lo queremos en orden descendente
-				//Collections.reverse(result);
+				Collections.reverse(result);
 			}else if(order.equals(orders.get(5))) {
 				Collections.sort(result, Comparator.comparing(s -> s.getPagNumber()));
 				//anadir la siguiente linea si lo queremos en orden descendente
