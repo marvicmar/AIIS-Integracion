@@ -53,18 +53,21 @@ public class BookResource {
 	
 	@GET
 	@Produces("application/json")
-	public Collection<Book> getAll(@QueryParam("q") String q, @QueryParam("order") String order, @QueryParam("limit") Integer limit, @QueryParam("offSet") Integer offSet)
-	{	
+	public Collection<Book> getAll(@QueryParam("name") String name, @QueryParam("order") String order, @QueryParam("limit") Integer limit, @QueryParam("offSet") Integer offSet)
+	{	 
 		
-		List<String> orders = List.of("genre", "year", "artist");
+		List<String> orders = List.of("genre", "year", "author","title","rate","pagnumber");
 		List<Book> result = new ArrayList<>();
 		
 		for(Book book: repository.getAllBooks()) {
-			if(q == null || q.isBlank() 
-					|| book.getTitle().toLowerCase().contains(q.toLowerCase()) 
-					|| book.getAuthor().toLowerCase().contains(q.toLowerCase()) 
-					|| book.getGenre().toLowerCase().contains(q.toLowerCase()) 	
-					|| book.getPublisher().toLowerCase().contains(q.toLowerCase())){
+			if(name == null || name.isBlank() 
+					|| book.getTitle().toLowerCase().contains(name.toLowerCase()) 
+					|| book.getAuthor().toLowerCase().contains(name.toLowerCase()) 
+					|| book.getGenre().toLowerCase().contains(name.toLowerCase())
+					|| book.getYear().toString().toLowerCase().contains(name.toLowerCase())
+					|| book.getRate().toString().toLowerCase().contains(name.toLowerCase()) 
+					|| book.getPagNumber().toString().toLowerCase().contains(name.toLowerCase()) 
+					|| book.getPublisher().toLowerCase().contains(name.toLowerCase())){
 				result.add(book);
 			}
 		}
@@ -76,8 +79,20 @@ public class BookResource {
 				Collections.sort(result, Comparator.comparing(s -> s.getGenre()));
 			} else if(order.equals(orders.get(1))) {
 				Collections.sort(result, Comparator.comparing(s -> s.getYear()));
+				//anadir la siguiente linea si lo queremos en orden descendente
+				//Collections.reverse(result);
 			} else if(order.equals(orders.get(2))) {
 				Collections.sort(result, Comparator.comparing(s -> s.getAuthor()));
+			}else if(order.equals(orders.get(3))) {
+				Collections.sort(result, Comparator.comparing(s -> s.getTitle()));
+			}else if(order.equals(orders.get(4))) {
+				Collections.sort(result, Comparator.comparing(s -> s.getRate()));
+				//anadir la siguiente linea si lo queremos en orden descendente
+				//Collections.reverse(result);
+			}else if(order.equals(orders.get(5))) {
+				Collections.sort(result, Comparator.comparing(s -> s.getPagNumber()));
+				//anadir la siguiente linea si lo queremos en orden descendente
+				//Collections.reverse(result);
 			}
 		}
 		if(offSet != null) {
