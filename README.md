@@ -2,7 +2,7 @@
 
 La API REST estará formada por dos recursos que permitirán manipular colecciones de libros y libros respectivamente. 
 
-### Recurso Song ###
+### Recurso Book ###
 | HTTP  | URI | Descripción |
 | ------------- | ------------- | ------------- |
 | GET |  /books | Devuelve todas los libros de la aplicación.  •	 Es posible ordenar los libros por el título, género, el año, el autor, la valoración o número de páginas con el parámetro de query “order”, que acepta los valores "title", “genre”, “year”, "author", "rate" o "pagnumber". • 	También es posible filtrar los libros devueltos con el parámetro de query “name”, que devuelve aquellos libros cuyo título, autor, genero o editorial contengan la cadena enviada (ignorando mayúsculas y minúsculas). |
@@ -27,7 +27,7 @@ Cada **libro** tiene un id, titulo, nombre del autor, genero, año de publicaci�
 ```
 
 
-### Recurso Playlist ###
+### Recurso Bookslist ###
 | HTTP  | URI | Descripción |
 | ------------- | ------------- | ------------- |
 | GET | /bookslists  | Ver todas las listas de libros existentes. •	Es posible ordenar las listas de libros por nombre con el parámetro de query “desc”, que solo acepta el valor “name” . •	También es posible filtrar las listas de libros devueltas con dos parámetros de query: “isEmpty”, que devuelve listas sin libros si vale “true” o listas con libros si vale “false”; “name”, que devuelve las listas cuyo nombre coincida exactamente con el valor del parámetro. |
