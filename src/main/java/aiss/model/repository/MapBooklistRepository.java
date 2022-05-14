@@ -36,8 +36,8 @@ public class MapBooklistRepository implements BooklistRepository{
 		fundamentalsOfWavelets.setTitle("Fundamentals of Wavelets");
 		fundamentalsOfWavelets.setAuthor("Goswami, Jaideva");
 		fundamentalsOfWavelets.setGenre("signal_processing");
-		fundamentalsOfWavelets.setYear(0);
-		fundamentalsOfWavelets.setRate(0.);
+		fundamentalsOfWavelets.setYear(2010);
+		fundamentalsOfWavelets.setRate(8.5);
 		fundamentalsOfWavelets.setPagNumber(228);
 		fundamentalsOfWavelets.setPublisher("Wiley");
 		addBook(fundamentalsOfWavelets);
@@ -46,8 +46,8 @@ public class MapBooklistRepository implements BooklistRepository{
 		dataSmart.setTitle("Data Smart");
 		dataSmart.setAuthor("Foreman, John");
 		dataSmart.setGenre("data_science");
-		dataSmart.setYear(0);
-		dataSmart.setRate(0.);
+		dataSmart.setYear(2013);
+		dataSmart.setRate(8.2);
 		dataSmart.setPagNumber(235);
 		dataSmart.setPublisher("Wiley");
 		addBook(dataSmart);
@@ -56,8 +56,8 @@ public class MapBooklistRepository implements BooklistRepository{
 		godCreatedTheIntegers.setTitle("God Created the Integers");
 		godCreatedTheIntegers.setAuthor("Hawking, Stephen");
 		godCreatedTheIntegers.setGenre("mathematics");
-		godCreatedTheIntegers.setYear(0);
-		godCreatedTheIntegers.setRate(0.);
+		godCreatedTheIntegers.setYear(2005);
+		godCreatedTheIntegers.setRate(9.);
 		godCreatedTheIntegers.setPagNumber(197);
 		godCreatedTheIntegers.setPublisher("Penguin");
 		addBook(godCreatedTheIntegers);
@@ -66,8 +66,8 @@ public class MapBooklistRepository implements BooklistRepository{
 		Superfreakonomics.setTitle("Superfreakonomics");
 		Superfreakonomics.setAuthor("Dubner, Stephen");
 		Superfreakonomics.setGenre("economics");
-		Superfreakonomics.setYear(0);
-		Superfreakonomics.setRate(0.);
+		Superfreakonomics.setYear(2009);
+		Superfreakonomics.setRate(9.2);
 		Superfreakonomics.setPagNumber(179);
 		Superfreakonomics.setPublisher("HarperCollins");
 		addBook(Superfreakonomics);
@@ -76,8 +76,8 @@ public class MapBooklistRepository implements BooklistRepository{
 		Orientalism.setTitle("Orientalism");
 		Orientalism.setAuthor("Said, Edward");
 		Orientalism.setGenre("history");
-		Orientalism.setYear(0);
-		Orientalism.setRate(0.);
+		Orientalism.setYear(1978);
+		Orientalism.setRate(8.6);
 		Orientalism.setPagNumber(197);
 		Orientalism.setPublisher("Penguin");
 		addBook(Orientalism);
