@@ -36,8 +36,8 @@ public class MapBooklistRepository implements BooklistRepository{
 		fundamentalsOfWavelets.setTitle("Fundamentals of Wavelets");
 		fundamentalsOfWavelets.setAuthor("Goswami, Jaideva");
 		fundamentalsOfWavelets.setGenre("signal_processing");
-		fundamentalsOfWavelets.setYear(2010);
-		fundamentalsOfWavelets.setRate(8.5);
+		fundamentalsOfWavelets.setYear(0);
+		fundamentalsOfWavelets.setRate(0.);
 		fundamentalsOfWavelets.setPagNumber(228);
 		fundamentalsOfWavelets.setPublisher("Wiley");
 		addBook(fundamentalsOfWavelets);
@@ -46,8 +46,8 @@ public class MapBooklistRepository implements BooklistRepository{
 		dataSmart.setTitle("Data Smart");
 		dataSmart.setAuthor("Foreman, John");
 		dataSmart.setGenre("data_science");
-		dataSmart.setYear(2013);
-		dataSmart.setRate(8.2);
+		dataSmart.setYear(0);
+		dataSmart.setRate(0.);
 		dataSmart.setPagNumber(235);
 		dataSmart.setPublisher("Wiley");
 		addBook(dataSmart);
@@ -56,8 +56,8 @@ public class MapBooklistRepository implements BooklistRepository{
 		godCreatedTheIntegers.setTitle("God Created the Integers");
 		godCreatedTheIntegers.setAuthor("Hawking, Stephen");
 		godCreatedTheIntegers.setGenre("mathematics");
-		godCreatedTheIntegers.setYear(2005);
-		godCreatedTheIntegers.setRate(9.);
+		godCreatedTheIntegers.setYear(0);
+		godCreatedTheIntegers.setRate(0.);
 		godCreatedTheIntegers.setPagNumber(197);
 		godCreatedTheIntegers.setPublisher("Penguin");
 		addBook(godCreatedTheIntegers);
@@ -66,8 +66,8 @@ public class MapBooklistRepository implements BooklistRepository{
 		Superfreakonomics.setTitle("Superfreakonomics");
 		Superfreakonomics.setAuthor("Dubner, Stephen");
 		Superfreakonomics.setGenre("economics");
-		Superfreakonomics.setYear(2009);
-		Superfreakonomics.setRate(9.2);
+		Superfreakonomics.setYear(0);
+		Superfreakonomics.setRate(0.);
 		Superfreakonomics.setPagNumber(179);
 		Superfreakonomics.setPublisher("HarperCollins");
 		addBook(Superfreakonomics);
@@ -76,8 +76,8 @@ public class MapBooklistRepository implements BooklistRepository{
 		Orientalism.setTitle("Orientalism");
 		Orientalism.setAuthor("Said, Edward");
 		Orientalism.setGenre("history");
-		Orientalism.setYear(1978);
-		Orientalism.setRate(8.6);
+		Orientalism.setYear(0);
+		Orientalism.setRate(0.);
 		Orientalism.setPagNumber(197);
 		Orientalism.setPublisher("Penguin");
 		addBook(Orientalism);
@@ -105,10 +105,10 @@ public class MapBooklistRepository implements BooklistRepository{
 	
 	// Booklist related operations
 	@Override
-	public void addBooklist(Booklist p) {
-		String id = "b" + index++;	
-		p.setId(id);
-		booklistMap.put(id,p);
+	public void addBooklist(Booklist bl) {
+		String id = "bl" + index++;	
+		bl.setId(id);
+		booklistMap.put(id,bl);
 	}
 	
 	@Override
@@ -132,28 +132,28 @@ public class MapBooklistRepository implements BooklistRepository{
 	}
 
 	@Override
-	public void addBook(String playlistId, String songId) {
-		Booklist playlist = getBooklist(playlistId);
-		playlist.addBook(bookMap.get(songId));
+	public void addBook(String booklistId, String bookId) {
+		Booklist booklist = getBooklist(booklistId);
+		booklist.addBook(bookMap.get(bookId));
 	}
 
 	@Override
-	public Collection<Book> getAll(String playlistId) {
-		return getBooklist(playlistId).getBooks();
+	public Collection<Book> getAll(String booklistId) {
+		return getBooklist(booklistId).getBooks();
 	}
 
 	@Override
-	public void removeBook(String playlistId, String songId) {
-		getBooklist(playlistId).deleteBook(songId);
+	public void removeBook(String booklistId, String bookId) {
+		getBooklist(booklistId).deleteBook(bookId);
 	}
 	
 	// Book related operations
 	
 	@Override
-	public void addBook(Book s) {
-		String id = "s" + index++;
-		s.setId(id);
-		bookMap.put(id, s);
+	public void addBook(Book b) {
+		String id = "b" + index++;
+		b.setId(id);
+		bookMap.put(id, b);
 	}
 	
 	@Override
@@ -167,20 +167,22 @@ public class MapBooklistRepository implements BooklistRepository{
 	}
 
 	@Override
-	public void updateBook(Book s) {
-		Book book = bookMap.get(s.getId());
-		book.setTitle(s.getTitle());
-		book.setAuthor(s.getAuthor());
-		book.setGenre(s.getGenre());
-		book.setYear(s.getYear());
-		book.setRate(s.getRate());
-		book.setPagNumber(s.getPagNumber());
-		book.setPublisher(s.getPublisher());
+	public void updateBook(Book b) {
+		Book book = bookMap.get(b.getId());
+		book.setTitle(b.getTitle());
+		book.setAuthor(b.getAuthor());
+		book.setGenre(b.getGenre());
+		book.setYear(b.getYear());
+		book.setRate(b.getRate());
+		book.setPagNumber(b.getPagNumber());
+		book.setPublisher(b.getPublisher());
 	}
 
 	@Override
 	public void deleteBook(String bookId) {
 		bookMap.remove(bookId);
 	}
+
+	
 	
 }
