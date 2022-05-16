@@ -72,3 +72,49 @@ Una **lista de libros** tiene un _identificador, nombre, descripción y un conju
 }
 
 ```
+
+### Recurso User ###
+| HTTP  | URI | Descripción |
+| ------------- | ------------- | ------------- |
+| GET | /users  | Ver todas los usuarios existentes. •	Es posible ordenar los usarios por nombre, nombre de usario o mail con el parámetro de query “order”, que acepta el valor “name”, "userName" o "mail" . •	También es posible filtrar los usuarios devueltas con dos parámetros de query: “isEmpty”, que devuelven los usarios sin wishes si vale “true” o listas con wishes si vale “false”; “name”, que devuelve las listas cuyo nombre, nombre de usuario o mail coincida exactamente con el valor del parámetro. |
+| GET | /users/{userId} | Devuelve el usuario con id=userId. Si el usuario no existe devuelve un “404 Not Found”. |
+| POST | /users | Añadir un nuevo usuario. Los datos del usuario (nombre, nombre de usuario y mail) se proporcionan en el cuerpo de la petición en formato JSON. Los deseos del usuario se pueden incluir aquí opcionalmente. Si el nombre, nombre de usuario o mail no es válido (nulo o vacío), devuelve un error “400 Bad Request”. Si se añade satisfactoriamente, devuelve “201 Created” con la referencia a la URI y los datos del usuario. |
+| PUT | /users | Actualiza el usuario cuyos datos se pasan en el cuerpo de la petición en formato JSON (deben incluir el id del usuario).  Si el usuario no existe, devuelve un “404 Not Found”. Si se intenta actualizar los deseos del usuario, devuelve un error “400 Bad Request”. Para actualizar los deseos se debe usar el recurso BookList mostrado previamente. Si se realiza correctamente, devuelve “204 No Content”. |
+| DELETE | /users/{userId} | Elimina el usuario con id=userId. Si el usuario no existe, devuelve un “404 Not Found”. Si se realiza correctamente, devuelve “204 No Content”. |
+| POST |  /users/{userId}/{wishId} | Añade el deseo con id=wishId al usuario con id=userId. Si el usuario o el deseo no existe, devuelve un “404 Not Found”. Si el deseo ya está incluido en el wishList del usuario devuelve un “400 Bad Request”. Si se añade satisfactoriamente, devuelve “201 Created” con la referencia a la URI y el contenido de la lista. |
+| DELETE | /users/{userId}/{wishId}  | Elimina el deseo con id=wishId de la wishList del usuario con id=userId. Si el deseo o el usuario no existe, devuelve un “404 Not Found”. Si se realiza correctamente, devuelve “204 No Content”.|
+
+
+Un **usuario** tiene un _identificador, nombre, nombre de usuario, email y un conjunto de deseos_. La representación JSON de este recurso es:
+
+```cpp
+{
+	"id":"b1",
+	"name":"Favourites",
+	"description":"A sample booklist",
+	"books":[
+		{
+			"id":"s3",
+			"title":"Superfreakonomics",
+			"author":"Dubner, Stephen",
+			"genre":"economics",
+			"year":"0",
+			"rate":"0.",
+			"pagnumber":"179",
+			"publisher":"HarperCollins"
+		},
+
+		{			
+			"id":"s4",
+			"title":"Orientalism",
+			"author":"Said, Edward",
+			"genre":"history",
+			"year":"0",
+			"rate":"0.",
+			"pagnumber":"197",
+			"publisher":"Penguin"
+		}
+		]
+}
+
+```
