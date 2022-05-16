@@ -10,18 +10,37 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <title>Book - API Rest</title>
+    <link rel="stylesheet" href="libros.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
   </head>
 
-  <body>
-    <h1>Hello! <br> Book - API Rest </h1>
-	
+  <body class="fondo1">
+ 
+    <h1 class="cabezera">Hello! <br> Book - API Rest </h1>
+	<!-- 
     <table>
       <tr>
         <td colspan="2" style="font-weight:bold;">Available Servlets:</td>        
       </tr>
       <tr>
-        <td><a href="api/booklist">Libros</a></td>
+        <td><a href="api/booklist">Listas de libros</a></td>
       </tr>
-    </table>
+      <tr> 
+      	 <td><a href="api/books">Libros</a></td>
+      </tr>
+    </table> -->
+    
+	<table class="position-absolute top-50 start-50 translate-middle" style=" border-collapse: collapse">
+		<td style="margin: 15px; padding: 15px">
+		    <div class="card rounded border-dark" style="width: 12rem;">
+		  		<a href="http://localhost:8089/api/books"><img src="libro.png" class="card-img" alt="Obtención de Books"></a>
+		    </div>
+	    </td>
+		<td style="margin: 15px; padding: 15px">
+			<div class="card rounded border-dark" style="width: 12rem;">
+		  		<a href="http://localhost:8089/api/booklist"><img src="pila_libros.png" class="card-img-bottom rounded" alt="Obtención de Booklist"></a>
+		    </div>
+		</td>
+	</table>
   </body>
 </html>
