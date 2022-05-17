@@ -88,33 +88,15 @@ Una **lista de libros** tiene un _identificador, nombre, descripción y un conju
 Un **usuario** tiene un _identificador, nombre, nombre de usuario, email y un conjunto de deseos_. La representación JSON de este recurso es:
 
 ```cpp
-{
-	"id":"b1",
-	"name":"Favourites",
-	"description":"A sample booklist",
-	"books":[
-		{
-			"id":"s3",
-			"title":"Superfreakonomics",
-			"author":"Dubner, Stephen",
-			"genre":"economics",
-			"year":"0",
-			"rate":"0.",
-			"pagnumber":"179",
-			"publisher":"HarperCollins"
-		},
-
-		{			
-			"id":"s4",
-			"title":"Orientalism",
-			"author":"Said, Edward",
-			"genre":"history",
-			"year":"0",
-			"rate":"0.",
-			"pagnumber":"197",
-			"publisher":"Penguin"
-		}
-		]
-}
+ {
+        "id": "u8",
+        "name": "Belen Fraga",
+        "userName": "bel_fra",
+        "email": "belenFra@mail.com",
+        "wishList": [
+            "bl5",
+            "bl6"
+        ]
+    }
 
 ```
