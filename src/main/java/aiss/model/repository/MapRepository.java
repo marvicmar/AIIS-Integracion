@@ -15,7 +15,9 @@ public class MapRepository implements BooklistRepository, UserRepository{
 	Map<String, Book> bookMap;
 	Map<String, User> userMap;
 	private static MapRepository instance=null;
-	private int index=0;
+	private int idBL=0;
+	private int idB=0;
+	private int idU=0;
 	
 	
 	public static MapRepository getInstance() {
@@ -39,7 +41,7 @@ public class MapRepository implements BooklistRepository, UserRepository{
 		fundamentalsofWavelets.setTitle("Fundamentals of Wavelets");
 		fundamentalsofWavelets.setAuthor("Goswami, Jaideva");
 		fundamentalsofWavelets.setGenre("signal_processing");
-		fundamentalsofWavelets.setYear(0);
+		fundamentalsofWavelets.setYear(2018);
 		fundamentalsofWavelets.setRate(0.);
 		fundamentalsofWavelets.setPagNumber(228);
 		fundamentalsofWavelets.setPublisher("Wiley");
@@ -49,7 +51,7 @@ public class MapRepository implements BooklistRepository, UserRepository{
 		dataSmart.setTitle("Data Smart");
 		dataSmart.setAuthor("Foreman, John");
 		dataSmart.setGenre("data_science");
-		dataSmart.setYear(0);
+		dataSmart.setYear(2019);
 		dataSmart.setRate(0.);
 		dataSmart.setPagNumber(235);
 		dataSmart.setPublisher("Wiley");
@@ -59,7 +61,7 @@ public class MapRepository implements BooklistRepository, UserRepository{
 		godCreatedtheIntegers.setTitle("God Created the Integers");
 		godCreatedtheIntegers.setAuthor("Hawking, Stephen");
 		godCreatedtheIntegers.setGenre("mathematics");
-		godCreatedtheIntegers.setYear(0);
+		godCreatedtheIntegers.setYear(2019);
 		godCreatedtheIntegers.setRate(0.);
 		godCreatedtheIntegers.setPagNumber(197);
 		godCreatedtheIntegers.setPublisher("Penguin");
@@ -69,7 +71,7 @@ public class MapRepository implements BooklistRepository, UserRepository{
 		superfreakonomics.setTitle("Superfreakonomics");
 		superfreakonomics.setAuthor("Dubner, Stephen");
 		superfreakonomics.setGenre("economics");
-		superfreakonomics.setYear(0);
+		superfreakonomics.setYear(2018);
 		superfreakonomics.setRate(0.);
 		superfreakonomics.setPagNumber(179);
 		superfreakonomics.setPublisher("HarperCollins");
@@ -79,7 +81,7 @@ public class MapRepository implements BooklistRepository, UserRepository{
 		orientalism.setTitle("Orientalism");
 		orientalism.setAuthor("Said, Edward");
 		orientalism.setGenre("history");
-		orientalism.setYear(0);
+		orientalism.setYear(2017);
 		orientalism.setRate(0.);
 		orientalism.setPagNumber(197);
 		orientalism.setPublisher("Penguin");
@@ -89,7 +91,7 @@ public class MapRepository implements BooklistRepository, UserRepository{
 		natureofStatisticalLearningTheoryThe.setTitle("Nature of Statistical Learning Theory, The");
 		natureofStatisticalLearningTheoryThe.setAuthor("Vapnik, Vladimir");
 		natureofStatisticalLearningTheoryThe.setGenre("data_science");
-		natureofStatisticalLearningTheoryThe.setYear(0);
+		natureofStatisticalLearningTheoryThe.setYear(2017);
 		natureofStatisticalLearningTheoryThe.setRate(0.);
 		natureofStatisticalLearningTheoryThe.setPagNumber(230);
 		natureofStatisticalLearningTheoryThe.setPublisher("Springer");
@@ -99,7 +101,7 @@ public class MapRepository implements BooklistRepository, UserRepository{
 		integrationoftheIndianStates.setTitle("Integration of the Indian States");
 		integrationoftheIndianStates.setAuthor("Menon, V P");
 		integrationoftheIndianStates.setGenre("history");
-		integrationoftheIndianStates.setYear(0);
+		integrationoftheIndianStates.setYear(2019);
 		integrationoftheIndianStates.setRate(0.);
 		integrationoftheIndianStates.setPagNumber(217);
 		integrationoftheIndianStates.setPublisher("Orient Blackswan");
@@ -109,7 +111,7 @@ public class MapRepository implements BooklistRepository, UserRepository{
 		drunkardsWalkThe.setTitle("Drunkard's Walk, The");
 		drunkardsWalkThe.setAuthor("Mlodinow, Leonard");
 		drunkardsWalkThe.setGenre("science");
-		drunkardsWalkThe.setYear(0);
+		drunkardsWalkThe.setYear(2020);
 		drunkardsWalkThe.setRate(0.);
 		drunkardsWalkThe.setPagNumber(197);
 		drunkardsWalkThe.setPublisher("Penguin");
@@ -119,7 +121,7 @@ public class MapRepository implements BooklistRepository, UserRepository{
 		imageProcessingMathematicalMorphology.setTitle("Image Processing & Mathematical Morphology");
 		imageProcessingMathematicalMorphology.setAuthor("Shih, Frank");
 		imageProcessingMathematicalMorphology.setGenre("signal_processing");
-		imageProcessingMathematicalMorphology.setYear(0);
+		imageProcessingMathematicalMorphology.setYear(2022);
 		imageProcessingMathematicalMorphology.setRate(0.);
 		imageProcessingMathematicalMorphology.setPagNumber(241);
 		imageProcessingMathematicalMorphology.setPublisher("CRC");
@@ -129,7 +131,7 @@ public class MapRepository implements BooklistRepository, UserRepository{
 		howtoThinkLikeSherlockHolmes.setTitle("How to Think Like Sherlock Holmes");
 		howtoThinkLikeSherlockHolmes.setAuthor("Konnikova, Maria");
 		howtoThinkLikeSherlockHolmes.setGenre("psychology");
-		howtoThinkLikeSherlockHolmes.setYear(0);
+		howtoThinkLikeSherlockHolmes.setYear(2020);
 		howtoThinkLikeSherlockHolmes.setRate(0.);
 		howtoThinkLikeSherlockHolmes.setPagNumber(240);
 		howtoThinkLikeSherlockHolmes.setPublisher("Penguin");
@@ -139,7 +141,7 @@ public class MapRepository implements BooklistRepository, UserRepository{
 		dataScientistsatWork.setTitle("Data Scientists at Work");
 		dataScientistsatWork.setAuthor("Sebastian Gutierrez");
 		dataScientistsatWork.setGenre("data_science");
-		dataScientistsatWork.setYear(0);
+		dataScientistsatWork.setYear(2021);
 		dataScientistsatWork.setRate(0.);
 		dataScientistsatWork.setPagNumber(230);
 		dataScientistsatWork.setPublisher("Apress");
@@ -149,7 +151,7 @@ public class MapRepository implements BooklistRepository, UserRepository{
 		slaughterhouseFive.setTitle("Slaughterhouse Five");
 		slaughterhouseFive.setAuthor("Vonnegut, Kurt");
 		slaughterhouseFive.setGenre("fiction");
-		slaughterhouseFive.setYear(0);
+		slaughterhouseFive.setYear(2021);
 		slaughterhouseFive.setRate(0.);
 		slaughterhouseFive.setPagNumber(198);
 		slaughterhouseFive.setPublisher("Random House");
@@ -159,7 +161,7 @@ public class MapRepository implements BooklistRepository, UserRepository{
 		birthofaTheorem.setTitle("Birth of a Theorem");
 		birthofaTheorem.setAuthor("Villani, Cedric");
 		birthofaTheorem.setGenre("mathematics");
-		birthofaTheorem.setYear(0);
+		birthofaTheorem.setYear(2021);
 		birthofaTheorem.setRate(0.);
 		birthofaTheorem.setPagNumber(234);
 		birthofaTheorem.setPublisher("Bodley Head");
@@ -169,7 +171,7 @@ public class MapRepository implements BooklistRepository, UserRepository{
 		structureInterpretationofComputerPrograms.setTitle("Structure & Interpretation of Computer Programs");
 		structureInterpretationofComputerPrograms.setAuthor("Sussman, Gerald");
 		structureInterpretationofComputerPrograms.setGenre("computer_science");
-		structureInterpretationofComputerPrograms.setYear(0);
+		structureInterpretationofComputerPrograms.setYear(2022);
 		structureInterpretationofComputerPrograms.setRate(0.);
 		structureInterpretationofComputerPrograms.setPagNumber(240);
 		structureInterpretationofComputerPrograms.setPublisher("MIT Press");
@@ -179,7 +181,7 @@ public class MapRepository implements BooklistRepository, UserRepository{
 		ageofWrathThe.setTitle("Age of Wrath, The");
 		ageofWrathThe.setAuthor("Eraly, Abraham");
 		ageofWrathThe.setGenre("history");
-		ageofWrathThe.setYear(0);
+		ageofWrathThe.setYear(2022);
 		ageofWrathThe.setRate(0.);
 		ageofWrathThe.setPagNumber(238);
 		ageofWrathThe.setPublisher("Penguin");
@@ -189,7 +191,7 @@ public class MapRepository implements BooklistRepository, UserRepository{
 		trialThe.setTitle("Trial, The");
 		trialThe.setAuthor("Kafka, Frank");
 		trialThe.setGenre("fiction");
-		trialThe.setYear(0);
+		trialThe.setYear(2022);
 		trialThe.setRate(0.);
 		trialThe.setPagNumber(198);
 		trialThe.setPublisher("Random House");
@@ -199,7 +201,7 @@ public class MapRepository implements BooklistRepository, UserRepository{
 		statisticalDecisionTheory.setTitle("Statistical Decision Theory'");
 		statisticalDecisionTheory.setAuthor("Pratt, John");
 		statisticalDecisionTheory.setGenre("data_science");
-		statisticalDecisionTheory.setYear(0);
+		statisticalDecisionTheory.setYear(2020);
 		statisticalDecisionTheory.setRate(0.);
 		statisticalDecisionTheory.setPagNumber(236);
 		statisticalDecisionTheory.setPublisher("MIT Press");
@@ -209,7 +211,7 @@ public class MapRepository implements BooklistRepository, UserRepository{
 		dataMiningHandbook.setTitle("Data Mining Handbook");
 		dataMiningHandbook.setAuthor("Nisbet, Robert");
 		dataMiningHandbook.setGenre("data_science");
-		dataMiningHandbook.setYear(0);
+		dataMiningHandbook.setYear(2020);
 		dataMiningHandbook.setRate(0.);
 		dataMiningHandbook.setPagNumber(242);
 		dataMiningHandbook.setPublisher("Apress");
@@ -219,7 +221,7 @@ public class MapRepository implements BooklistRepository, UserRepository{
 		newMachiavelliThe.setTitle("New Machiavelli, The");
 		newMachiavelliThe.setAuthor("Wells, H. G.");
 		newMachiavelliThe.setGenre("fiction");
-		newMachiavelliThe.setYear(0);
+		newMachiavelliThe.setYear(2020);
 		newMachiavelliThe.setRate(0.);
 		newMachiavelliThe.setPagNumber(180);
 		newMachiavelliThe.setPublisher("Penguin");
@@ -229,7 +231,7 @@ public class MapRepository implements BooklistRepository, UserRepository{
 		physicsPhilosophy.setTitle("Physics & Philosophy");
 		physicsPhilosophy.setAuthor("Heisenberg, Werner");
 		physicsPhilosophy.setGenre("science");
-		physicsPhilosophy.setYear(0);
+		physicsPhilosophy.setYear(2020);
 		physicsPhilosophy.setRate(0.);
 		physicsPhilosophy.setPagNumber(197);
 		physicsPhilosophy.setPublisher("Penguin");
@@ -239,7 +241,7 @@ public class MapRepository implements BooklistRepository, UserRepository{
 		makingSoftware.setTitle("Making Software");
 		makingSoftware.setAuthor("Oram, Andy");
 		makingSoftware.setGenre("computer_science");
-		makingSoftware.setYear(0);
+		makingSoftware.setYear(2019);
 		makingSoftware.setRate(0.);
 		makingSoftware.setPagNumber(232);
 		makingSoftware.setPublisher("O'Reilly");
@@ -249,7 +251,7 @@ public class MapRepository implements BooklistRepository, UserRepository{
 		analysisVolI.setTitle("Analysis, Vol I");
 		analysisVolI.setAuthor("Tao, Terence");
 		analysisVolI.setGenre("mathematics");
-		analysisVolI.setYear(0);
+		analysisVolI.setYear(2019);
 		analysisVolI.setRate(0.);
 		analysisVolI.setPagNumber(248);
 		analysisVolI.setPublisher("HBA");
@@ -259,7 +261,7 @@ public class MapRepository implements BooklistRepository, UserRepository{
 		machineLearningforHackers.setTitle("Machine Learning for Hackers");
 		machineLearningforHackers.setAuthor("Conway, Drew");
 		machineLearningforHackers.setGenre("data_science");
-		machineLearningforHackers.setYear(0);
+		machineLearningforHackers.setYear(2018);
 		machineLearningforHackers.setRate(0.);
 		machineLearningforHackers.setPagNumber(233);
 		machineLearningforHackers.setPublisher("O'Reilly");
@@ -269,7 +271,7 @@ public class MapRepository implements BooklistRepository, UserRepository{
 		signalandtheNoiseThe.setTitle("Signal and the Noise, The");
 		signalandtheNoiseThe.setAuthor("Silver, Nate");
 		signalandtheNoiseThe.setGenre("data_science");
-		signalandtheNoiseThe.setYear(0);
+		signalandtheNoiseThe.setYear(2019);
 		signalandtheNoiseThe.setRate(0.);
 		signalandtheNoiseThe.setPagNumber(233);
 		signalandtheNoiseThe.setPublisher("Penguin");
@@ -289,7 +291,7 @@ public class MapRepository implements BooklistRepository, UserRepository{
 		introductiontoAlgorithms.setTitle("Introduction to Algorithms");
 		introductiontoAlgorithms.setAuthor("Cormen, Thomas");
 		introductiontoAlgorithms.setGenre("computer_science");
-		introductiontoAlgorithms.setYear(0);
+		introductiontoAlgorithms.setYear(2016);
 		introductiontoAlgorithms.setRate(0.);
 		introductiontoAlgorithms.setPagNumber(234);
 		introductiontoAlgorithms.setPublisher("MIT Press");
@@ -299,7 +301,7 @@ public class MapRepository implements BooklistRepository, UserRepository{
 		beautifulandtheDamnedThe.setTitle("Beautiful and the Damned, The");
 		beautifulandtheDamnedThe.setAuthor("Deb, Siddhartha");
 		beautifulandtheDamnedThe.setGenre("nonfiction");
-		beautifulandtheDamnedThe.setYear(0);
+		beautifulandtheDamnedThe.setYear(2017);
 		beautifulandtheDamnedThe.setRate(0.);
 		beautifulandtheDamnedThe.setPagNumber(198);
 		beautifulandtheDamnedThe.setPublisher("Penguin");
@@ -309,7 +311,7 @@ public class MapRepository implements BooklistRepository, UserRepository{
 		outsiderThe.setTitle("Outsider, The");
 		outsiderThe.setAuthor("Camus, Albert");
 		outsiderThe.setGenre("fiction");
-		outsiderThe.setYear(0);
+		outsiderThe.setYear(2018);
 		outsiderThe.setRate(0.);
 		outsiderThe.setPagNumber(198);
 		outsiderThe.setPublisher("Penguin");
@@ -319,7 +321,7 @@ public class MapRepository implements BooklistRepository, UserRepository{
 		completeSherlockHolmesTheVolI.setTitle("Complete Sherlock Holmes, The - Vol I");
 		completeSherlockHolmesTheVolI.setAuthor("Doyle, Arthur Conan");
 		completeSherlockHolmesTheVolI.setGenre("fiction");
-		completeSherlockHolmesTheVolI.setYear(0);
+		completeSherlockHolmesTheVolI.setYear(2019);
 		completeSherlockHolmesTheVolI.setRate(0.);
 		completeSherlockHolmesTheVolI.setPagNumber(176);
 		completeSherlockHolmesTheVolI.setPublisher("Random House");
@@ -2212,7 +2214,7 @@ public class MapRepository implements BooklistRepository, UserRepository{
 	// Booklist related operations
 	@Override
 	public void addBooklist(Booklist bl) {
-		String id = "bl" + index++;	
+		String id = "bl" + idBL++;	
 		bl.setId(id);
 		booklistMap.put(id,bl);
 	}
@@ -2257,7 +2259,7 @@ public class MapRepository implements BooklistRepository, UserRepository{
 	
 	@Override
 	public void addBook(Book b) {
-		String id = "b" + index++;
+		String id = "b" + idB++;
 		b.setId(id);
 		bookMap.put(id, b);
 	}
@@ -2293,7 +2295,7 @@ public class MapRepository implements BooklistRepository, UserRepository{
 	
 	@Override
 	public void addUser(User u) {
-		String id = "u" + index++;
+		String id = "u" + idU++;
 		u.setId(id);
 		userMap.put(id, u);
 	}
