@@ -2,7 +2,6 @@
 package aiss.model;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import javax.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
@@ -15,25 +14,22 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
     "id",
-    "console",
     "name",
-    "review",
-    "score"
+    "description",
+    "games"
 })
 @Generated("jsonschema2pojo")
-public class Game {
+public class GameList {
 
     @JsonProperty("id")
     private String id;
-    @JsonProperty("console")
-    private List<String> console = null;
     @JsonProperty("name")
     private String name;
-    @JsonProperty("review")
-    private String review;
-    @JsonProperty("score")
-    private Integer score;
-    
+    @JsonProperty("description")
+    private String description;
+    @JsonProperty("games")
+    private Object games;
+   
     @JsonProperty("id")
     public String getId() {
         return id;
@@ -42,16 +38,6 @@ public class Game {
     @JsonProperty("id")
     public void setId(String id) {
         this.id = id;
-    }
-
-    @JsonProperty("console")
-    public List<String> getConsole() {
-        return console;
-    }
-
-    @JsonProperty("console")
-    public void setConsole(List<String> console) {
-        this.console = console;
     }
 
     @JsonProperty("name")
@@ -64,23 +50,25 @@ public class Game {
         this.name = name;
     }
 
-    @JsonProperty("review")
-    public String getReview() {
-        return review;
+    @JsonProperty("description")
+    public String getDescription() {
+        return description;
     }
 
-    @JsonProperty("review")
-    public void setReview(String review) {
-        this.review = review;
+    @JsonProperty("description")
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    @JsonProperty("score")
-    public Integer getScore() {
-        return score;
+    @JsonProperty("games")
+    public Object getGames() {
+        return games;
     }
 
-    @JsonProperty("score")
-    public void setScore(Integer score) {
-        this.score = score;
+    @JsonProperty("games")
+    public void setGames(Object games) {
+        this.games = games;
     }
+
+
 }
