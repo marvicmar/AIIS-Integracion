@@ -1,0 +1,602 @@
+openapi: 3.0.0
+servers:
+  - url: https://wishes-350515.oa.r.appspot.com/api
+    description: API wishes, donde podemos encontar dos enlaces directos a books y bookslist
+info:
+  description: API to save all the things people like (books, films, music)
+  version: 1.0.0
+  title: Wishes
+  contact:
+    email: carruipor@alum.us.es
+    name: Carmen Ruiz
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+tags:
+  - name: books
+    description: Books
+  - name: bookslist
+    description: List full of books
+  - name: users
+    description: Users of the API
+paths:
+  /books:
+    get:
+      tags:
+        - books
+      summary: Get books
+      description: Get all books
+      operationId: getBooks
+      parameters:
+        - name: order
+          in: query
+          description: Order results by genre, year, author, title, rate or page number
+          required: false
+          schema:
+            type: string
+            enum:
+              - genre
+              - year
+              - author
+              - title
+              - rate
+              - pagnumber
+        - name: name
+          in: query
+          description: Query to filter. You can filter by title, author, genre, year, rate or publisher
+          required: false
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description:  Maximum number of results
+          required: false
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+        - name: offset
+          in: query
+          description: Offset of the results
+          required: false
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+      responses:
+        '200':
+          description: Search results matching criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+        '400':
+          description: Bad request
+    post:
+      tags:
+        - books
+      summary: Create a book
+      description: Create a book
+      operationId: createBook
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Book'
+        description: Song to create
+        required: true
+      responses:
+        '201':
+          description: Book created
+          content:
+            application/json:
+              schema:
+                 $ref: '#/components/schemas/Book'
+        '400':
+          description: Bad request
+    put:
+      tags:
+        - books
+      summary: Update a book
+      description: Update a book
+      operationId: updateBook
+      requestBody:
+        content:
+          application/json:
+            schema:
+               $ref: '#/components/schemas/Book'
+        description: Book to update
+      responses:
+        '204':
+          description: Book updated
+        '400':
+          description: Bad request
+        '404':
+          description: Book not found
+          
+  '/books/{id}':
+    get:
+      tags:
+        - books
+      summary: Get a book
+      description: Get a book
+      operationId: getBook
+      parameters:
+        - name: id
+          in: path
+          description: Id of the book
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Book found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+        '404':
+          description: Book not found
+    delete:
+      tags:
+        - books
+      summary: Delete book
+      description: Delete book
+      operationId: deleteBook
+      parameters:
+        - name: id
+          in: path
+          description: Id of the book
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Book deleted
+        '404':
+          description: Book not found
+          
+          
+  /bookslist:
+    get:
+      tags:
+        - bookslist
+      summary: Get booklist
+      description: Get all booklist
+      operationId: getBookslists
+      parameters:
+        - name: desc
+          in: query
+          description: Order results by name
+          required: false
+          schema:
+            type: string
+            enum:
+              - name
+              - '-name'
+        - name: isEmpty
+          in: query
+          description: Filter booklist with no books
+          required: false
+          schema:
+            type: boolean
+        - name: name
+          in: query
+          description: Filter booklist by name
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Search results matching criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BooksList'
+        '400':
+          description: Bad request
+    post:
+      tags:
+        - bookslist
+      summary: Create a bookslist
+      description: Create a bookslist
+      operationId: createBookslist
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BooksList'
+        description: Bookslist to create
+        required: true
+      responses:
+        '201':
+          description: Bookslist created
+          content:
+            application/json:
+              schema:
+                 $ref: '#/components/schemas/BooksList'
+        '400':
+          description: Bad request
+    put:
+      tags:
+        - bookslist
+      summary: Update a bookslist
+      description: Update a bookslist
+      operationId: updateBookslist
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BooksList'
+        description: Bookslist to update
+      responses:
+        '204':
+          description: Bookslist updated
+        '400':
+          description: Bad request
+        '404':
+          description: Bookslist not found
+          
+  '/bookslist/{id}':
+    get:
+      tags:
+        - bookslist
+      summary: Get a bookslist
+      description: Get a bookslist
+      operationId: getBookslist
+      parameters:
+        - name: id
+          in: path
+          description: Id of the bookslist
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Bookslist found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BooksList'
+        '404':
+          description: Bookslist not found
+    delete:
+      tags:
+        - bookslist
+      summary: Delete bookslist
+      description: Delete bookslist
+      operationId: deleteBookslist
+      parameters:
+        - name: id
+          in: path
+          description: Id of the bookslist
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Bookslist deleted
+        '404':
+          description: Bookslist not found
+          
+  '/bookslist/{bookslistId}/{bookId}':
+    post:
+      tags:
+        - bookslist
+      summary: Add song to bookslist
+      description: Add song to bookslist
+      operationId: addBookToBookslist
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              type: string
+      parameters:
+        - name: bookslistId
+          in: path
+          description: Id of the bookslist
+          required: true
+          schema:
+            type: string
+        - name: bookId
+          in: path
+          description: Id of the book
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Book added to playlist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BooksList'
+        '400':
+          description: Bad request
+        '404':
+          description: Playlist or song not found
+    delete:
+      tags:
+        - bookslist
+      summary: Delete song from playlist
+      description: Delete song from playlist
+      operationId: deleteSongFromPlayist
+      parameters:
+        - name: bookslistId
+          in: path
+          description: Id of the bookslist
+          required: true
+          schema:
+            type: string
+        - name: bookId
+          in: path
+          description: Id of the book
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Book deleted from playlist
+        '404':
+          description: Bookslist or book not found
+          
+  /users:
+    get:
+      tags:
+        - users
+      summary: Get users
+      description: Get all users
+      operationId: getUsers
+      parameters:
+        - name: order
+          in: query
+          description: Order results by name, user name and mail
+          required: false
+          schema:
+            type: string
+            enum:
+              - name
+              - userName
+              - mail
+        - name: isEmpty
+          in: query
+          description: Filter user with no wishes in their wishList
+          required: false
+          schema:
+            type: boolean
+        - name: name
+          in: query
+          description: Query to filter. You can filter the user by name, user name and mail.
+          required: false
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description:  Maximum number of results
+          required: false
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+        - name: offset
+          in: query
+          description: Offset of the results
+          required: false
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+      responses:
+        '200':
+          description: Search results matching criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '400':
+          description: Bad request
+    post:
+      tags:
+        - users
+      summary: Create a user
+      description: Create a user
+      operationId: createUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        description: User to create
+        required: true
+      responses:
+        '201':
+          description: User created
+          content:
+            application/json:
+              schema:
+                 $ref: '#/components/schemas/User'
+        '400':
+          description: Bad request
+    put:
+      tags:
+        - users
+      summary: Update a user
+      description: Update a user
+      operationId: updateUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        description: User to update
+      responses:
+        '204':
+          description: User updated
+        '400':
+          description: User request
+        '404':
+          description: User not found
+    
+  '/users/{id}':
+    get:
+      tags:
+        - users
+      summary: Get a user
+      description: Get a user
+      operationId: getUser
+      parameters:
+        - name: id
+          in: path
+          description: Id of the user
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: User found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          description: User not found
+    delete:
+      tags:
+        - users
+      summary: Delete user
+      description: Delete user
+      operationId: deleteUser
+      parameters:
+        - name: id
+          in: path
+          description: Id of the user
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: User deleted
+        '404':
+          description: User not found
+          
+components:
+  schemas:
+    Book:
+        type: object
+        required:
+          - title
+        properties:
+          id:
+            type: string
+          title:
+            type: string
+          author:
+            type: string
+          genre:
+            type: string
+          year:
+            type: integer
+          rate:
+            type: number
+          pagnumber:
+            type: integer
+          publisher:
+            type: string
+        example:
+            id: b3
+            title: Superfreakonomics
+            author: Dubner, Stephen
+            genre: economics
+            year: 0
+            rate: 0.
+            pagnumber: 179
+            publisher: HarperCollins
+    
+    BooksList:
+      type: object
+      required:
+        - name
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        books:
+          type: array
+          items:
+            type: object
+            required:
+              - title
+            properties:
+              id:
+                type: string
+              title:
+                type: string
+              author:
+                type: string
+              genre:
+                type: string
+              year:
+                type: integer
+              rate:
+                type: number
+              pagnumber:
+                type: integer
+              publisher:
+                type: string
+          example:
+            id: bl6
+            name: Favourites
+            description: A sample booklist
+            songs:
+              - id: b3
+                title: Superfreakonomics
+                author: Dubner, Stephen
+                genre: economics
+                year: 0
+                rate: 0.
+                pagnumber: 179
+                publisher: HarperCollins
+              - id: b4
+                title: Orientalism
+                author: Said, Edward
+                genre: history
+                year: 0
+                rate: 0.
+                pagnumber: 197
+                publisher: Penguin
+    User:
+      type: object
+      required:
+        - name
+        - userName
+        - mail
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        userName:
+          type: string
+        mail:
+          type: string
+        wishList:
+          type: array
+          items:
+              type: string
+      example:
+            id: u8
+            name: Belen Fraga
+            userName: bel_fra
+            mail: belenFra@mail.com
+            wishList: 
+              - bl5
+              - bl6
