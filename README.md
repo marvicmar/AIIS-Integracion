@@ -15,12 +15,12 @@ Cada **libro** tiene un id, titulo, nombre del autor, genero, año de publicaci�
 
 ```cpp
 {
-	"id":"s0",
+	"id":"b0",
 	"title":"Fundamentals of Wavelets",
 	"author":"Goswami, Jaideva",
 	"genre":"signal_processing",
-	"year":"0",
-	"rate":"0.",
+	"year":"2010",
+	"rate":"9.",
 	"pagnumber":"228",
 	"publisher":"Wiley"
 }
@@ -43,28 +43,28 @@ Una **lista de libros** tiene un _identificador, nombre, descripción y un conju
 
 ```cpp
 {
-	"id":"b1",
+	"id":"bl6",
 	"name":"Favourites",
 	"description":"A sample booklist",
 	"books":[
 		{
-			"id":"s3",
+			"id":"b3",
 			"title":"Superfreakonomics",
 			"author":"Dubner, Stephen",
 			"genre":"economics",
-			"year":"0",
-			"rate":"0.",
+			"year":"2009",
+			"rate":"9.2",
 			"pagnumber":"179",
 			"publisher":"HarperCollins"
 		},
 
 		{			
-			"id":"s4",
+			"id":"b4",
 			"title":"Orientalism",
 			"author":"Said, Edward",
 			"genre":"history",
-			"year":"0",
-			"rate":"0.",
+			"year":"1978",
+			"rate":"9.2",
 			"pagnumber":"197",
 			"publisher":"Penguin"
 		}
