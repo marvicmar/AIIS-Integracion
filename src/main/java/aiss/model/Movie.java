@@ -1,67 +1,74 @@
+
 package aiss.model;
 
-import com.google.appengine.repackaged.com.google.type.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import javax.annotation.Generated;
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+    "page",
+    "results",
+    "total_pages",
+    "total_results"
+})
+@Generated("jsonschema2pojo")
 public class Movie {
-	String title;
-	Date release_date;
-	Double vote_average;
-	Integer id;
-	String original_language;
-	String overview;
-	
-	public Movie() {
-		super();
-	}
-	
-	public Movie(String title, Date release_date, Double vote_average, Integer id, String original_language,
-			String overview) {
-		super();
-		this.title = title;
-		this.release_date = release_date;
-		this.vote_average = vote_average;
-		this.id = id;
-		this.original_language = original_language;
-		this.overview = overview;
-	}
-	public String getTitle() {
-		return title;
-	}
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	public Date getRelease_date() {
-		return release_date;
-	}
-	public void setRelease_date(Date release_date) {
-		this.release_date = release_date;
-	}
-	public Double getVote_average() {
-		return vote_average;
-	}
-	public void setVote_average(Double vote_average) {
-		this.vote_average = vote_average;
-	}
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	public String getOriginal_language() {
-		return original_language;
-	}
-	public void setOriginal_language(String original_language) {
-		this.original_language = original_language;
-	}
-	public String getOverview() {
-		return overview;
-	}
-	public void setOverview(String overview) {
-		this.overview = overview;
-	}
-	
-	
-	
-	
+
+    @JsonProperty("page")
+    private Integer page;
+    @JsonProperty("results")
+    private List<MovieResult> results = null;
+    @JsonProperty("total_pages")
+    private Integer totalPages;
+    @JsonProperty("total_results")
+    private Integer totalResults;
+
+    @JsonProperty("page")
+    public Integer getPage() {
+        return page;
+    }
+
+    @JsonProperty("page")
+    public void setPage(Integer page) {
+        this.page = page;
+    }
+
+    @JsonProperty("results")
+    public List<MovieResult> getResults() {
+        return results;
+    }
+
+    @JsonProperty("results")
+    public void setResults(List<MovieResult> results) {
+        this.results = results;
+    }
+
+    @JsonProperty("total_pages")
+    public Integer getTotalPages() {
+        return totalPages;
+    }
+
+    @JsonProperty("total_pages")
+    public void setTotalPages(Integer totalPages) {
+        this.totalPages = totalPages;
+    }
+
+    @JsonProperty("total_results")
+    public Integer getTotalResults() {
+        return totalResults;
+    }
+
+    @JsonProperty("total_results")
+    public void setTotalResults(Integer totalResults) {
+        this.totalResults = totalResults;
+    }
+
 }
