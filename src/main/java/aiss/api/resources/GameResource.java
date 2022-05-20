@@ -1,5 +1,7 @@
 package aiss.api.resources;
 
+import java.io.UnsupportedEncodingException;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -25,7 +27,9 @@ public class GameResource {
 		return _instance; 
 	}
 	
+	
 	private String uri = "https://indigo-computer-349516.ew.r.appspot.com/api/games";
+	
 	
 	@GET
 	@Produces("application/json")
