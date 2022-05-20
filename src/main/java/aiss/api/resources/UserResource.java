@@ -5,7 +5,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -23,6 +27,7 @@ import javax.ws.rs.core.Response.ResponseBuilder;
 import org.jboss.resteasy.spi.BadRequestException;
 import org.jboss.resteasy.spi.NotFoundException;
 
+import aiss.model.Book;
 import aiss.model.Booklist;
 import aiss.model.User;
 import aiss.model.repository.BooklistRepository;
@@ -103,6 +108,20 @@ public class UserResource {
 	public User get(@PathParam("id") String userId) {
 		return repository.getUser(userId);
 	}
+	
+	@GET
+	@Path("/stadistic")
+	@Produces("application/json")
+	public Map<Book, Long> getStadisticBooks() {
+		return this.getBooksStadistic();
+	}
+	
+	@GET
+	@Path("/stadistic/{id}")
+	@Produces("application/json")
+	public Map<Book, Long> getStadisticBooksUser(@PathParam("id") String userId) {
+		return this.getBooksStadisticUser(userId);
+	} 
 	
 	@POST
 	@Consumes("application/json")
@@ -212,6 +231,47 @@ public class UserResource {
 		repository.removeWish(userId, wishId);
 		
 		return Response.noContent().build();
+	}
+	
+	public Map<Book, Long> getBooksStadisticUser(String userId){
+		Set<String> ids = this.repository.getUser(userId).getWishList();
+		Set<String> idsFromBooklist = new HashSet<>();
+		List<String> bookIds = new ArrayList<>();
+		for(String id: ids) {
+			if(id.startsWith("bl")) {
+				idsFromBooklist.add(id);
+			} else if(id.startsWith("b")) {
+				bookIds.add(id);
+			}
+		}
+		BooklistResource booklistResource = BooklistResource.getInstance();
+		BookResource bookResource = BookResource.getInstance();
+		bookIds.addAll(booklistResource.getListOfBookFromBooklistSet(idsFromBooklist).stream().map(book -> book.getId()).collect(Collectors.toList()));
+		return bookResource.getMapAllBookFromBooklist(bookIds);
+	}
+	
+	public Map<Book, Long> getBooksStadistic(){
+		try {
+			List<String> ids = this.repository.getAllUsers().stream().map(u -> u.getWishList()).filter(l -> l!=null).flatMap(u -> u.stream()).collect(Collectors.toList());
+	
+			Set<String> idsFromBooklist = new HashSet<>();
+			List<String> bookIds = new ArrayList<>();
+			for(String id: ids) {
+				if(id.startsWith("bl")) {
+					idsFromBooklist.add(id);
+				} else if(id.startsWith("b")) {
+					bookIds.add(id);
+				}
+			}
+			BooklistResource booklistResource = BooklistResource.getInstance();
+			BookResource bookResource = BookResource.getInstance();
+			bookIds.addAll(booklistResource.getListOfBookFromBooklistSet(idsFromBooklist).stream().map(book -> book.getId()).collect(Collectors.toList()));
+			return bookResource.getMapAllBookFromBooklist(bookIds);
+		} catch (Exception e) {
+			System.out.println("Error::::::::::::::::::::::::::::::");
+			System.out.println(e);
+			return null;
+		}
 	}
 
 }

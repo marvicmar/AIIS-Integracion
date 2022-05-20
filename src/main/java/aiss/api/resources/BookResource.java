@@ -20,6 +20,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 
 import aiss.model.Book;
+import aiss.model.Booklist;
 import aiss.model.repository.BooklistRepository;
 import aiss.model.repository.MapRepository;
 
@@ -31,6 +32,10 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 
 
@@ -49,6 +54,19 @@ public class BookResource {
 		if(_instance==null)
 			_instance=new BookResource();
 		return _instance; 
+	}
+	
+	public Map<Book, Long> getMapAllBookFromBooklist(List<String> ids){
+		System.out.println("Aquiiiiiiii");
+		System.out.println(ids);
+		List<Book> ls = ids.stream().map(id -> repository.getBook(id))
+				.collect(Collectors.toList());
+		
+		
+		Map<Book, Long> result = ls.stream()
+				.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+		System.out.println(result);
+		return result;
 	}
 	
 	@GET
@@ -79,7 +97,7 @@ public class BookResource {
 			} else if(order.equals(orders.get(1))) {
 				Collections.sort(result, Comparator.comparing(s -> s.getYear()));
 				//anadir la siguiente linea si lo queremos en orden descendente
-				Collections.reverse(result);
+				//Collections.reverse(result);
 			} else if(order.equals(orders.get(2))) {
 				Collections.sort(result, Comparator.comparing(s -> s.getAuthor()));
 			}else if(order.equals(orders.get(3))) {
@@ -87,7 +105,7 @@ public class BookResource {
 			}else if(order.equals(orders.get(4))) {
 				Collections.sort(result, Comparator.comparing(s -> s.getRate()));
 				//anadir la siguiente linea si lo queremos en orden descendente
-				Collections.reverse(result);
+				//Collections.reverse(result);
 			}else if(order.equals(orders.get(5))) {
 				Collections.sort(result, Comparator.comparing(s -> s.getPagNumber()));
 				//anadir la siguiente linea si lo queremos en orden descendente
