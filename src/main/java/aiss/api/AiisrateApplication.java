@@ -7,6 +7,7 @@ import javax.ws.rs.core.Application;
 
 import aiss.api.resources.BookResource;
 import aiss.api.resources.BooklistResource;
+import aiss.api.resources.MovieResource;
 import aiss.api.resources.UserResource;
 
 
@@ -21,7 +22,9 @@ public class AiisrateApplication extends Application {
 
 		singletons.add(BooklistResource.getInstance());
 		singletons.add(BookResource.getInstance());
+		singletons.add(MovieResource.getInstance());
 		singletons.add(UserResource.getInstance());
+		singletons.add(GameResource.getInstance());
 	}
 
 	@Override
