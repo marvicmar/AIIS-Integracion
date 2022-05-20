@@ -1,5 +1,7 @@
 package aiss.model;
 
+import java.util.Objects;
+
 public class Book {
 
 	private String id;
@@ -98,6 +100,32 @@ public class Book {
 	
 	public void setPublisher(String publisher) {
 		this.publisher = publisher;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(author, genre, id, pagNumber, publisher, rate, title, year);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Book other = (Book) obj;
+		return Objects.equals(author, other.author) && Objects.equals(genre, other.genre)
+				&& Objects.equals(id, other.id) && Objects.equals(pagNumber, other.pagNumber)
+				&& Objects.equals(publisher, other.publisher) && Objects.equals(rate, other.rate)
+				&& Objects.equals(title, other.title) && Objects.equals(year, other.year);
+	}
+
+	@Override
+	public String toString() {
+		return "Book [id=" + id + ", title=" + title + ", author=" + author + ", genre=" + genre + ", year=" + year
+				+ ", rate=" + rate + ", pagNumber=" + pagNumber + ", publisher=" + publisher + "]";
 	}
 
 }
