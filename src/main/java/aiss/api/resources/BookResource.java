@@ -57,7 +57,7 @@ public class BookResource {
 	}
 	
 	public Map<Book, Long> getMapAllBookFromBooklist(List<String> ids){
-		System.out.println("Aquiiiiiiii");
+		
 		System.out.println(ids);
 		List<Book> ls = ids.stream().map(id -> repository.getBook(id))
 				.collect(Collectors.toList());

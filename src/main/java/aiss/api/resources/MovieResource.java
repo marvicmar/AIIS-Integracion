@@ -1,8 +1,11 @@
 package aiss.api.resources;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.ws.rs.GET;
@@ -14,12 +17,11 @@ import javax.ws.rs.QueryParam;
 import org.restlet.resource.ClientResource;
 import org.restlet.resource.ResourceException;
 
-import aiss.model.Game;
+
 import aiss.model.Movie;
 import aiss.model.MovieDetails;
 import aiss.model.MovieResult;
-import aiss.model.repository.BooklistRepository;
-import aiss.model.repository.MapRepository;
+
 
 @Path("/movies")
 public class MovieResource {
@@ -38,9 +40,20 @@ public class MovieResource {
 	
 	@GET
 	@Produces("application/json")
-	public List<MovieResult> getAll() {
+	public List<MovieResult> getAll(@QueryParam("desc") Boolean desc,@QueryParam("name") String name) {
         ClientResource cr = new ClientResource(String.format("%s/movie/popular?api_key=%s", uri, key));
-        List<MovieResult> result = cr.get(Movie.class).getResults();
+        List<MovieResult> movies = cr.get(Movie.class).getResults();
+        List<MovieResult> result=new ArrayList<>();
+        for(MovieResult movie: movies) {
+        	if(name == null || movie.getTitle().toLowerCase().contains(name.toLowerCase())) {
+        		result.add(movie);
+		}
+	}
+        
+        if(desc != null && desc) {
+			Collections.sort(result, Comparator.comparing(p -> p.getVoteAverage()));
+			Collections.reverse(result);
+		}
         return result;
     }
 	

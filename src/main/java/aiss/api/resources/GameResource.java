@@ -1,6 +1,10 @@
 package aiss.api.resources;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -9,6 +13,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 
 import org.restlet.representation.Representation;
 import org.restlet.resource.ClientResource;
@@ -33,9 +38,20 @@ public class GameResource {
 	
 	@GET
 	@Produces("application/json")
-	public Game[] getAll() {
+	public List<Game> getAll(@QueryParam("desc") Boolean desc, @QueryParam("name") String name) {
         ClientResource cr = new ClientResource(uri);
-        Game[] result = cr.get(Game[].class);
+        Game[] games = cr.get(Game[].class);
+        List<Game>result=new ArrayList<>();
+        for (Game game : games) {
+        	if(name == null || game.getName().toLowerCase().contains(name.toLowerCase())) {
+				result.add(game);
+			}
+		}
+        
+        if(desc != null && desc) {
+			Collections.sort(result, Comparator.comparing(p -> p.getScore()));
+			Collections.reverse(result);
+        } 
         return result;
     }
 	

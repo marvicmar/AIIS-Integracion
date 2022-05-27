@@ -82,5 +82,10 @@ public class Game {
     public void setScore(Integer score) {
         this.score = score;
     }
+    @Override
+    public String toString() {
+    	// TODO Auto-generated method stub
+    	return "["+id+","+console+","+name+","+review+","+score.toString()+"]";
+    }
 
 }

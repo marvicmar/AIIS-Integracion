@@ -1,6 +1,6 @@
 openapi: 3.0.0
 servers:
-  - url: https://wishes-350515.oa.r.appspot.com/
+  - url: https://wishes-350515.oa.r.appspot.com/api
     description: API wishes, donde podemos encontar dos enlaces directos a books y bookslist
 info:
   description: API to save all the things people like (books, films, music)
@@ -509,7 +509,7 @@ components:
           publisher:
             type: string
         example:
-            id: s3
+            id: b3
             title: Superfreakonomics
             author: Dubner, Stephen
             genre: economics
@@ -553,11 +553,11 @@ components:
               publisher:
                 type: string
           example:
-            id: b1
+            id: bl6
             name: Favourites
             description: A sample booklist
             songs:
-              - id: s3
+              - id: b3
                 title: Superfreakonomics
                 author: Dubner, Stephen
                 genre: economics
@@ -565,7 +565,7 @@ components:
                 rate: 0.
                 pagnumber: 179
                 publisher: HarperCollins
-              - id: s4
+              - id: b4
                 title: Orientalism
                 author: Said, Edward
                 genre: history

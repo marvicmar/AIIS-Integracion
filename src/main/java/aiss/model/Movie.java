@@ -70,5 +70,10 @@ public class Movie {
     public void setTotalResults(Integer totalResults) {
         this.totalResults = totalResults;
     }
+    @Override
+    public String toString() {
+    	// TODO Auto-generated method stub
+    	return "["+page+","+results.toString()+","+totalPages.toString()+","+totalResults.toString();
+    }
 
 }

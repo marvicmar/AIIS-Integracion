@@ -200,4 +200,10 @@ public class MovieResult {
     public void setVoteCount(Integer voteCount) {
         this.voteCount = voteCount;
     }
+    @Override
+    public String toString() {
+    	// TODO Auto-generated method stub
+    	return "["+adult+","+backdropPath+","+genreIds+","+id+","+originalLanguage+","+
+    			originalTitle+","+overview+","+popularity+","+posterPath+","+releaseDate+","+title+","+video+","+voteAverage+","+voteCount+"]";
+    }
 }

@@ -68,5 +68,10 @@ public class Gamelist {
     public void setGames(Object games) {
         this.games = games;
     }
+   @Override
+    public String toString() {
+    	// TODO Auto-generated method stub
+    	return "["+id+","+name+","+description+","+games+"]";
+    }
 
 }

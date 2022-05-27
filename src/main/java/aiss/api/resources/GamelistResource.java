@@ -1,6 +1,8 @@
 package aiss.api.resources;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -9,6 +11,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 
 import org.restlet.representation.Representation;
 import org.restlet.resource.ClientResource;
@@ -32,9 +35,16 @@ public class GamelistResource {
 	
 	@GET
 	@Produces("application/json")
-	public Gamelist[] getAll() throws UnsupportedEncodingException {
+	public List<Gamelist>  getAll(@QueryParam("name") String name) throws UnsupportedEncodingException {
         ClientResource cr = new ClientResource(uri);
-        Gamelist[] result = cr.get(Gamelist[].class);
+        Gamelist[] games = cr.get(Gamelist[].class);
+        List<Gamelist>result=new ArrayList<>();
+        for (Gamelist gamelist : games) {
+        	if(name == null ||  gamelist.getName().toLowerCase().contains(name.toLowerCase())) {
+				result.add(gamelist);
+			}
+        	
+		}
         return result;
     }
 	
